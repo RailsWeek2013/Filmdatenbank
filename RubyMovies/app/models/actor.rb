@@ -1,0 +1,2 @@
+class Actor < Participant
+end
