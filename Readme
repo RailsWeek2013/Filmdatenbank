@@ -1,0 +1,25 @@
+Projekt Filmdatenbank
+
+- Core Features:
+ - zentrale Verwaltung von Filmen (Bild, Beschreibung, Link zum Trailer (optional), Produzent, Schauspieler, Regie)
+ - Tags System
+ - Userverwaltung
+ - Rechteverwaltung
+ - Vorschlagsfunktion von Filmen von Usern
+
+- Features:
+ - Kommentare zu Filmen
+ - Bewertung von Filmen
+ - Statistik zu Bewertungen
+
+-Optional:
+ - Messaging System
+ - Fragen zu Interessen der Benutzer -> Auswahl von passenden Filmen
+ - Fragespiel zu Filmen mit passenden Antworten (Eingabe von User; Annahme durch Admin)
+ - Filmmusik zu Filmen
+
+Gems:
+ - Devise / AuthLogic
+ - CanCan
+ - Paperclip / Carrierwave
+
