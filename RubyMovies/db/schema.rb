@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130815103551) do
+ActiveRecord::Schema.define(version: 20130815111908) do
 
   create_table "comments", force: true do |t|
     t.string   "text"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20130815103551) do
     t.string   "link"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active"
   end
 
   create_table "participants", force: true do |t|
