@@ -6,4 +6,6 @@ class Film < ActiveRecord::Base
 	has_many :film_tags
 	has_many :tags, through: :film_tags
 	has_many :comments
+
+	mount_uploader :picture, PictureUploader
 end
