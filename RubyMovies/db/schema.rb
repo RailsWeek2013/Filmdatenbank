@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(version: 20130815111908) do
     t.datetime "updated_at"
   end
 
+  create_table "film_reviews", force: true do |t|
+    t.integer  "film_id"
+    t.integer  "review_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "film_tags", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
