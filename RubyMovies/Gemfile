@@ -46,3 +46,6 @@ end
 
 # Carrierwave
 gem 'carrierwave'
+
+# Carrierwave
+gem 'devise'
