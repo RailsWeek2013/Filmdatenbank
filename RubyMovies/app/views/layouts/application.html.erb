@@ -7,8 +7,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<h1><%= link_to "RubyMovies", root_path %></h1>
+	<%= link_to "Alle Filme", root_path %>
+	<%= link_to "Film vorschlagen / Film hinzufügen (ADMIN)", new_film_path %>
 
-<%= yield %>
+	<%= yield %>
 
 </body>
 </html>

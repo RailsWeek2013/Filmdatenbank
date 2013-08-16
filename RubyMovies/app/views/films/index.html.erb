@@ -1,33 +1,19 @@
-<h1>Listing films</h1>
+<h2>Alle Filme</h2>
 
 <table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Picture</th>
-      <th>Description</th>
-      <th>Link</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
   <tbody>
     <% @films.each do |film| %>
       <tr>
         <td><%= film.title %></td>
         <td><img height=100px width=100px src= <%= film.picture %> alt="Test"></img></td>
-        <td><%= film.description %></td>
-        <td><%= film.link %></td>
-        <td><%= link_to 'Show', film %></td>
-        <td><%= link_to 'Edit', edit_film_path(film) %></td>
-        <td><%= link_to 'Destroy', film, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+        <!-- TODO Folgende Links nur anzeigen, wenn der Benutzer Admin als Rolle hat -->
+        <td><%= link_to 'Details', film %></td>
+        <td><%= link_to 'Bearbeiten (ADMIN)', edit_film_path(film) %></td>
+        <td><%= link_to 'Entfernen (ADMIN)', film, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Film', new_film_path %>
