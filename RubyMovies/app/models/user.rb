@@ -8,4 +8,16 @@ class User < ActiveRecord::Base
 	has_many :reviews
 	has_many :films, through: :reviews
 	belongs_to :role
+
+	def admin?
+		self.role.name == "Admin"
+	end
+
+	def moderator?
+		self.role.name == "Moderator"
+	end
+
+	def user?
+		self.role.name == "User"
+	end
 end
