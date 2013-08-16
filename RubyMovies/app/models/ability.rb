@@ -3,14 +3,19 @@ class Ability
 
   def initialize(user)
     user ||= User.new
+    unless user.role
+        user.role = Role.find_by name: "Gast"
+    end
     if user.admin?
-        can :manageFilms, :manageUsers
+        can :manage, :all
     else
         if user.moderator?
-            can :manageFilms
+            can :manage, :all
         else
             if user.user?
-                can :suggestFilms
+                can :manage, :all
+            else
+                can :manage, :all
             end
         end
     end
