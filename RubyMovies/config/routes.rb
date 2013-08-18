@@ -1,5 +1,9 @@
 RubyMovies::Application.routes.draw do
+  get "users/list", as: "manageUser"
+  get "users/promote"
+  post "users/promote"
   devise_for :users, :controllers => { :registrations => "registrations" }
+  resources :users
   resources :films
   root :to => "films#index"
   # The priority is based upon order of creation: first created -> highest priority.

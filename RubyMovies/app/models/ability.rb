@@ -10,12 +10,12 @@ class Ability
         can :manage, :all
     else
         if user.moderator?
-            can :manage, :all
+            can :manage, Film
         else
             if user.user?
-                can :manage, :all
+                can :read, :all
             else
-                can :manage, :all
+                can :read, :all
             end
         end
     end
