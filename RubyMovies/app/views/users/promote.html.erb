@@ -1,0 +1,35 @@
+<h1>Benutzerverwaltung</h1>
+<h2>Benutzer</h2>
+<%= form_for(@user, url: user_path(@user), :html => {:multipart => true}) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <p>Name: <%= @user.name %>
+  </div>
+  <div class="field">
+    <p>Email: <%= @user.email %>
+  </div>
+    <div class="field">
+    <p>Rolle: <%= @user.role.name %>
+  </div>
+  <div class="field">
+    <p>Auswahl der Rolle:
+      <%= f.collection_select(:role_id, Role.all, :id, :name ) %>
+    </p>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  <%= link_to('Back', manageUser_url) %>
+  
+<% end %>
