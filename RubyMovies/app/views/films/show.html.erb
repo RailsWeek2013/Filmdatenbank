@@ -22,8 +22,28 @@
 
 <%= link_to 'Edit', edit_film_path(@film) %> |
 <%= link_to 'Back', films_path %>
-<%= link_to 'Kommentar hinzufügen', new_film_comment_path(@film) %>
+<p>Durchschnittsbewertung:
+  <%  if @film.average == nil
+        d = "Keine Bewertung"
+      else
+        d = @film.average 
+      end %>
 
+  <%= d %>
+</p>
+<p>Ihre Bewertung:
+<% if user_has_already_reviewed? @film %>
+   <%= user_review(@film) %>
+<% else %>
+  <% i = 0 
+    5.times do %>
+      <% i += 1 %>
+     <%= link_to i, film_review_path(@film, i), method: :post %>
+    <% end %>
+<% end %>
+</p>
+
+<%= link_to 'Kommentar hinzufügen', new_film_comment_path(@film) %>
 <h3>Kommentare:</h3>
 <% if @comments.empty? %>
 	<p>Keine Kommentare vorhanden!</p>

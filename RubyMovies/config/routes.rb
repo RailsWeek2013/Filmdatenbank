@@ -1,5 +1,5 @@
 RubyMovies::Application.routes.draw do
-
+  post "films/:fid/review/:rid", to: "films#review", as: "film_review"
   delete "comments/destroy/:id", to: "comments#destroy", as: "comments_destroy"
   get "/films/suggested", to: "films#suggested", as: "suggested_films"
   get "/films/set-active", to: "films#set-active", as: "active"

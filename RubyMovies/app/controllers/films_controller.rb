@@ -70,6 +70,22 @@ class FilmsController < ApplicationController
     end
   end
 
+  def review
+    f = Film.find(params[:fid])
+    r = Review.new
+    r.note = params[:rid]
+    r.film = f
+    r.user = current_user
+    if r.save
+      update_average f
+      redirect_to film_url(f)
+      #notice: "Bewertung wurde gespeichert!"
+    else
+      redirect_to film_url(f),
+      notice: "Bewertung wurde nicht gespeichert!"
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_film
@@ -79,5 +95,15 @@ class FilmsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def film_params
       params.require(:film).permit(:title, :picture, :description, :link, :active)
+    end
+
+    def update_average film
+      count = film.reviews.size
+      summe = 0.0
+      film.reviews.each do |r|
+        summe = summe + r.note
+      end
+      film.average = (summe  / count).round(2)
+      film.save
     end
 end

@@ -15,6 +15,9 @@ class Ability
             if user.user?
                 can :create, Film
                 can :read, Film
+                can :review, Film
+                can :create, Comment
+                can :read, Comment
             else
                 can :read, :all
             end

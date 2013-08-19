@@ -16,4 +16,21 @@ module UsersHelper
 		end
 		false
 	end
+
+	def user_has_already_reviewed? film
+		if user_signed_in?
+			r = Review.where(film: film, user: current_user)
+			return !r.empty?
+		end
+		false
+	end
+
+	def user_review film
+		if user_signed_in?
+			r = Review.where(film: film, user: current_user)
+			return 0 if r.empty?
+			return r.first.note
+		end
+		return 0
+	end
 end
