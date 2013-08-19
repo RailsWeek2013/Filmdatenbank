@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>RubyMovies</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
+	<title>RubyMovies</title>
+	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	<%= csrf_meta_tags %>
 </head>
 <body>
 	<h1><%= link_to "RubyMovies", root_path %></h1>
 	<%= link_to "Alle Filme", root_path %>
 	<%= link_to "Film vorschlagen / Film hinzufügen (MODERATOR/ADMIN)", new_film_path %>
 	<%= link_to "Vorgeschlagene Filme (MODERATOR/ADMIN)", suggested_films_url %>
+
+	<p class="notice"><%= notice %></p>
+	<p class="alert"><%= alert %></p>
 
 	<%= yield %>
 

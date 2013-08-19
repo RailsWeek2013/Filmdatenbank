@@ -46,3 +46,9 @@ end
 
 # Carrierwave
 gem 'carrierwave'
+
+# Devise
+gem 'devise'
+
+# Cancan
+gem 'cancan'

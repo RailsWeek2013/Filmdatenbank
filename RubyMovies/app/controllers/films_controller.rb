@@ -1,4 +1,6 @@
 class FilmsController < ApplicationController
+  authorize_resource
+  
   before_action :set_film, only: [:show, :edit, :update, :destroy]
 
   # GET /films
