@@ -18,7 +18,7 @@
 			<tr>
 				<td><%= user.name %></td>
 				<td><%= user.email %></td>
-				<td><%= link_to "Ändern", :action => 'promote', :u => user.id %></td>
+				<td><%= link_to "Ändern", promote_user_url(user.id) %></td>
 				<td><%= link_to "Löschen", user, method: :delete, data: { confirm: 'Sind Sie sicher?'} %></td>
 			</tr>
 			<% end %>
@@ -45,7 +45,7 @@
 			<tr>
 				<td><%= moderator.name %></td>
 				<td><%= moderator.email %></td>
-				<td><%= link_to "Ändern", :action => 'promote', :u => moderator.id %></td>
+				<td><%= link_to "Ändern", promote_user_url(moderator.id) %></td>
 				<td><%= link_to "Löschen", moderator, method: :delete, data: { confirm: 'Sind Sie sicher?'} %></td>
 			</tr>
 			<% end %>
@@ -72,7 +72,7 @@
 			<tr>
 				<td><%= admin.name %></td>
 				<td><%= admin.email %></td>
-				<td><%= link_to "Ändern", :action => 'promote', :u => admin.id %></td>
+				<td><%= link_to "Ändern", promote_user_url(admin.id) %></td>
 				<td><%= link_to "Löschen", admin, method: :delete, data: { confirm: 'Sind Sie sicher?'} %></td>
 			</tr>
 			<% end %>

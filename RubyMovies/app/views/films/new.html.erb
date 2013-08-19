@@ -1,4 +1,8 @@
-<h1>New film</h1>
+<% if admin_signed_in? || moderator_signed_in? %>
+	<h1>Film hinzufügen</h1>
+<% else %>
+	<h1>Film vorschlagen</h1>
+<% end %>
 
 <%= render 'form' %>
 

@@ -9,9 +9,22 @@
 <body>
 	<h1><%= link_to "RubyMovies", root_path %></h1>
 	<%= link_to "Alle Filme", root_path %>
-	<%= link_to "Film vorschlagen / Film hinzufügen (MODERATOR/ADMIN)", new_film_path %>
-	<%= link_to "Vorgeschlagene Filme (MODERATOR/ADMIN)", suggested_films_url %>
-
+	<% if user_signed_in? %>
+            <% if current_user.admin? || current_user.moderator? %>
+            	<%= link_to "Vorgeschlagene Filme", suggested_films_url %>
+            	 <% s = "Film hinzufügen" 
+             else 
+            	 s = "Film vorschlagen" 
+             end %>
+            <%= link_to s, new_film_path %>
+            <% if admin_signed_in? %>
+            	<%= link_to('Administration', manageUser_url) %>
+            <% end %>
+            <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+	<% else %>
+		<%= link_to('Registrierung', new_user_registration_url)  %>	
+		<%= link_to('Login', new_user_session_url)  %>	
+	<% end %>
 	<p class="notice"><%= notice %></p>
 	<p class="alert"><%= alert %></p>
 

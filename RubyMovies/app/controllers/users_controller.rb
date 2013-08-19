@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
 
   def promote
-  	@user = User.find(params[:u])
+  	@user = User.find(params[:id])
   end
 
   def list
@@ -14,10 +14,6 @@ class UsersController < ApplicationController
   	@users = User.where("role_id = ?", ur.id)
     @moderators = User.where("role_id = ?", mr.id)
     @admins = User.where("role_id = ?", ar.id)
-  end
-
-  def show
-    list
   end
 
   def update

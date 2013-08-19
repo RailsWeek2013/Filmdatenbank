@@ -19,8 +19,14 @@
 
           <!-- TODO Folgende Links in Abhaengingkeit zur Rolle des Users -->
           <br />
-          <%= link_to 'Bearbeiten (MODERATOR/ADMIN)', edit_film_path(film) %>
-          <%= link_to 'Entfernen (ADMIN)', film, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% if user_signed_in? %>
+            <% if current_user.admin? || current_user.moderator? %>
+              <%= link_to 'Bearbeiten (MODERATOR/ADMIN)', edit_film_path(film) %>
+            <% end %>
+            <% if current_user.admin? %>
+              <%= link_to 'Entfernen (ADMIN)', film, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+          <% end %>
         </td>
       </tr>
     <% end %>
