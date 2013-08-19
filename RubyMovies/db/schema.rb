@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130819130617) do
+ActiveRecord::Schema.define(version: 20130819201811) do
 
   create_table "comments", force: true do |t|
     t.string   "text"
@@ -51,6 +51,18 @@ ActiveRecord::Schema.define(version: 20130819130617) do
     t.datetime "updated_at"
     t.boolean  "active"
     t.float    "average"
+  end
+
+  create_table "messages", force: true do |t|
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.string   "subject"
+    t.string   "text"
+    t.boolean  "read"
+    t.boolean  "deleted_by_sender"
+    t.boolean  "deleted_by_recipient"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "participants", force: true do |t|
