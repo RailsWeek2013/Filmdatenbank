@@ -1,8 +1,8 @@
 class CreateFilmTags < ActiveRecord::Migration
   def change
-    create_table :film_tags do |t|
+    #create_table :film_tags do |t|
 
-      t.timestamps
-    end
+     # t.timestamps
+    #end
   end
 end
