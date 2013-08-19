@@ -18,6 +18,7 @@ class Ability
                 can :review, Film
                 can :create, Comment
                 can :read, Comment
+                can :read, Message
             else
                 can :read, :all
             end
