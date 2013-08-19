@@ -1,5 +1,4 @@
 RubyMovies::Application.routes.draw do
-  root to: "films#index"
   get "/films/suggested", to: "films#suggested", as: "suggested_films"
   get "/films/set-active", to: "films#set-active", as: "active"
   resources :films
@@ -10,7 +9,7 @@ RubyMovies::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => "registrations" }
   resources :users
 
-  root :to => "films#index"
+  root to: "films#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
