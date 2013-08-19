@@ -24,7 +24,7 @@
   </div>
   <div class="field">
     <p>Auswahl der Rolle:
-      <%= f.collection_select(:role_id, Role.all, :id, :name ) %>
+      <%= f.collection_select(:role_id, Role.where.not(name: "Gast"), :id, :name ) %>
     </p>
   </div>
   <div class="actions">
