@@ -7,6 +7,11 @@ class FilmsController < ApplicationController
     @films = Film.all
   end
 
+  # GET /films/suggested
+  def suggested
+    @films = Film.where(active: false)
+  end
+
   # GET /films/1
   # GET /films/1.json
   def show

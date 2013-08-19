@@ -1,5 +1,7 @@
 RubyMovies::Application.routes.draw do
   root to: "films#index"
+  get "/films/suggested", to: "films#suggested", as: "suggested_films"
+  get "/films/set-active", to: "films#set-active", as: "active"
   resources :films
 
   # The priority is based upon order of creation: first created -> highest priority.
