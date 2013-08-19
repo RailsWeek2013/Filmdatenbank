@@ -9,6 +9,7 @@
 				<th>Name</th>
 				<th>Email</th>
 				<th>Rolle ändern</th>
+				<th>Löschen</th>
 			</tr>
 		</thead>
 
@@ -18,6 +19,7 @@
 				<td><%= user.name %></td>
 				<td><%= user.email %></td>
 				<td><%= link_to "Ändern", :action => 'promote', :u => user.id %></td>
+				<td><%= link_to "Löschen", user, method: :delete, data: { confirm: 'Sind Sie sicher?'} %></td>
 			</tr>
 			<% end %>
 		</tbody>
@@ -34,6 +36,7 @@
 				<th>Name</th>
 				<th>Email</th>
 				<th>Rolle ändern</th>
+				<th>Löschen</th>
 			</tr>
 		</thead>
 
@@ -43,6 +46,7 @@
 				<td><%= moderator.name %></td>
 				<td><%= moderator.email %></td>
 				<td><%= link_to "Ändern", :action => 'promote', :u => moderator.id %></td>
+				<td><%= link_to "Löschen", moderator, method: :delete, data: { confirm: 'Sind Sie sicher?'} %></td>
 			</tr>
 			<% end %>
 		</tbody>
@@ -59,6 +63,7 @@
 				<th>Name</th>
 				<th>Email</th>
 				<th>Rolle ändern</th>
+				<th>Löschen</th>
 			</tr>
 		</thead>
 
@@ -68,6 +73,7 @@
 				<td><%= admin.name %></td>
 				<td><%= admin.email %></td>
 				<td><%= link_to "Ändern", :action => 'promote', :u => admin.id %></td>
+				<td><%= link_to "Löschen", admin, method: :delete, data: { confirm: 'Sind Sie sicher?'} %></td>
 			</tr>
 			<% end %>
 		</tbody>

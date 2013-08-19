@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
 
   #http://stackoverflow.com/questions/16852377/custom-user-fields-in-devise-3-under-rails-4
   def configure_permitted_parameters
-  	devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:name, :email) }
+  	devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:email) }
   	devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:name, :email, :password, :password_confirmation) }
   	devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:name, :email, :password, :password_confirmation, :current_password) }
   end

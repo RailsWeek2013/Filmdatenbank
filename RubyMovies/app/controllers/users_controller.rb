@@ -16,6 +16,10 @@ class UsersController < ApplicationController
     @admins = User.where("role_id = ?", ar.id)
   end
 
+  def show
+    list
+  end
+
   def update
     @user = User.all.find(params[:id])
     if @user.update_attributes(user_params)
@@ -26,9 +30,28 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    respond_to do |format|
+      format.html { redirect_to manageUser_url }
+      format.json { head :no_content }
+    end
+  end
+
+  #def delete
+  #  user = User.all.find(params[:id])
+  #  user.delete
+  #  redirect_to manageUser_url,
+  #  notice: "Favorit wurde erfolgreich gelöscht."
+  #end
+
   private
   def user_params
     params.require(:user).permit("role_id")
   end
 
+  def set_user
+    @user = User.find(params[:id])
+  end
 end
