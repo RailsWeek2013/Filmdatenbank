@@ -14,6 +14,12 @@ class MessagesController < ApplicationController
   # GET /messages/1
   # GET /messages/1.json
   def show
+    message = Message.find(params[:id])
+
+    if (message.recipient == current_user) && !message.read
+      message.read = true
+      message.save
+    end
   end
 
   # GET /messages/new
