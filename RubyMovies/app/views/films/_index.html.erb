@@ -12,7 +12,11 @@
           <img height=200px src= <%= film.picture %> alt="Test"></img>
         </td>
         <td>
-          <%= film.average %>
+          <% if film.average == nil %>
+            Keine Bewertung
+          <% else %>
+            <%= film.average %>
+          <% end %>
         </td>
         <td>
           <%= link_to 'Details', film %>
