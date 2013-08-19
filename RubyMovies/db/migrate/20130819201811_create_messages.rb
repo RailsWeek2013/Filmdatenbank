@@ -5,9 +5,9 @@ class CreateMessages < ActiveRecord::Migration
       t.integer :recipient_id
       t.string :subject
       t.string :text
-      t.boolean :read
-      t.boolean :deleted_by_sender
-      t.boolean :deleted_by_recipient
+      t.boolean :read, default: false
+      t.boolean :deleted_by_sender, default: false
+      t.boolean :deleted_by_recipient, default: false
 
       t.timestamps
     end

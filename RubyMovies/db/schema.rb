@@ -58,9 +58,9 @@ ActiveRecord::Schema.define(version: 20130819201811) do
     t.integer  "recipient_id"
     t.string   "subject"
     t.string   "text"
-    t.boolean  "read"
-    t.boolean  "deleted_by_sender"
-    t.boolean  "deleted_by_recipient"
+    t.boolean  "read",                 default: false
+    t.boolean  "deleted_by_sender",    default: false
+    t.boolean  "deleted_by_recipient", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
