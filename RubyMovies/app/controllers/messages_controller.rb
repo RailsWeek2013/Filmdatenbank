@@ -7,7 +7,8 @@ class MessagesController < ApplicationController
   # GET /messages.json
   # GET /messages/inbox
   def index
-    @messages = Message.all
+    @unread_messages = Message.where(recipient: current_user, read: false)
+    @read_messages = Message.where(recipient: current_user, read: true)
   end
 
   # GET /messages/1

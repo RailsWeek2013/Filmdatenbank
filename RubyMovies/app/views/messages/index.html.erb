@@ -1,39 +1,69 @@
-<h1>Listing messages</h1>
+<h1>Posteingang</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Sender</th>
-      <th>Recipient</th>
-      <th>Subject</th>
-      <th>Text</th>
-      <th>Read</th>
-      <th>Deleted by sender</th>
-      <th>Deleted by recipient</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @messages.each do |message| %>
+<h2>Ungelesene Nachrichten</h2>
+<% unless @unread_messages.empty? %>
+
+  <table>
+    <thead>
       <tr>
-        <td><%= message.sender_id %></td>
-        <td><%= message.recipient_id %></td>
-        <td><%= message.subject %></td>
-        <td><%= message.text %></td>
-        <td><%= message.read %></td>
-        <td><%= message.deleted_by_sender %></td>
-        <td><%= message.deleted_by_recipient %></td>
-        <td><%= link_to 'Show', message %></td>
-        <td><%= link_to 'Edit', edit_message_path(message) %></td>
-        <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Von</th>
+        <th>Betreff</th>
+        <th></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @unread_messages.each do |message| %>
+        <tr>
+          <td><%= message.sender.name %></td>
+          <td><%= message.subject %></td>
+          <td><%= link_to 'lesen', message %></td>
 
-<%= link_to 'New Message', new_message_path %>
+          <!-- TODO -->
+          <td><%= link_to 'löschen(TODO)', inbox_messages_path %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% else %>
+
+  Keine ungelesen Nachrichten vorhanden.
+
+<% end %>
+
+
+<h2>Gelesene Nachrichten</h2>
+<% unless @read_messages.empty? %>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Von</th>
+        <th>Betreff</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @read_messages.each do |message| %>
+        <tr>
+          <td><%= message.sender.name %></td>
+          <td><%= message.subject %></td>
+          <td><%= link_to 'lesen', message %></td>
+
+          <!-- TODO -->
+          <td><%= link_to 'löschen(TODO)', inbox_messages_path %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% else %>
+
+  Keine schon gelesenen Nachrichten vorhanden.
+
+<% end %>
