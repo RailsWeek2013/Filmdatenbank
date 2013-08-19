@@ -6,7 +6,7 @@ class FilmsController < ApplicationController
   # GET /films
   # GET /films.json
   def index
-    @films = Film.all
+    @active_films = Film.where(active: true)
   end
 
   # GET /films/suggested
@@ -84,6 +84,10 @@ class FilmsController < ApplicationController
       redirect_to film_url(f),
       notice: "Bewertung wurde nicht gespeichert!"
     end
+  end
+
+  def top
+    @active_films = Film.where(active: true).order('average DESC')
   end
 
   private

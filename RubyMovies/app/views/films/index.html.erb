@@ -1,34 +1,4 @@
 <h2>Alle Filme</h2>
 
-<table>
-  <tbody>
-    <% active_films = @films.select {|film| film.active?} %>
-    <% active_films.each do |film| %>
-      <tr>
-        <td>
-          <%= film.title %>
-        </td>
-      </tr>
-
-      <tr>
-        <td>
-          <img height=200px src= <%= film.picture %> alt="Test"></img>
-        </td>
-        <td>
-          <%= link_to 'Details', film %>
-
-          <!-- TODO Folgende Links in Abhaengingkeit zur Rolle des Users -->
-          <br />
-          <% if user_signed_in? %>
-            <% if current_user.admin? || current_user.moderator? %>
-              <%= link_to 'Bearbeiten (MODERATOR/ADMIN)', edit_film_path(film) %>
-            <% end %>
-            <% if current_user.admin? %>
-              <%= link_to 'Entfernen (ADMIN)', film, method: :delete, data: { confirm: 'Are you sure?' } %>
-            <% end %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= link_to 'Top-Filme', films_top_path %>
+<%= render 'index' %>
