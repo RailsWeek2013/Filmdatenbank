@@ -17,6 +17,8 @@ class FilmsController < ApplicationController
   # GET /films/1
   # GET /films/1.json
   def show
+    @film = Film.find(params[:id])
+    @comments = Comment.where(film: @film)
   end
 
   # GET /films/new

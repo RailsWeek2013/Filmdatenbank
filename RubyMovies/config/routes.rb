@@ -1,4 +1,6 @@
 RubyMovies::Application.routes.draw do
+
+  delete "comments/destroy/:id", to: "comments#destroy", as: "comments_destroy"
   get "/films/suggested", to: "films#suggested", as: "suggested_films"
   get "/films/set-active", to: "films#set-active", as: "active"
   resources :films
@@ -11,6 +13,10 @@ RubyMovies::Application.routes.draw do
       get "promote"
       post "promote"
     end
+  end
+
+  resources :films do
+    resources :comments
   end
 
   root to: "films#index"
