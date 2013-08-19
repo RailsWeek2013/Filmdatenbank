@@ -13,7 +13,8 @@ class Ability
             can :manage, Film
         else
             if user.user?
-                can :read, :all
+                can :create, Film
+                can :read, Film
             else
                 can :read, :all
             end
