@@ -20,6 +20,7 @@
             <% if admin_signed_in? %>
             	<%= link_to('Administration', manageUser_url) %>
             <% end %>
+            <%= link_to("Nachrichten(#{new_message_count})", inbox_messages_path) %>
             <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
 	<% else %>
 		<%= link_to('Registrierung', new_user_registration_url)  %>	

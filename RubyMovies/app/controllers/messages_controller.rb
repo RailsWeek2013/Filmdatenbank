@@ -1,10 +1,11 @@
 class MessagesController < ApplicationController
   authorize_resource
-  
+
   before_action :set_message, only: [:show, :edit, :update, :destroy]
 
   # GET /messages
   # GET /messages.json
+  # GET /messages/inbox
   def index
     @messages = Message.all
   end

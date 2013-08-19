@@ -1,4 +1,5 @@
 RubyMovies::Application.routes.draw do
+  get "messages/inbox", to: "messages#index", as: "inbox_messages"
   resources :messages
 
   get "films/top", to: "films#top", as: "films_top"
