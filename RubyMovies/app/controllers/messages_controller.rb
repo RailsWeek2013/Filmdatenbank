@@ -7,8 +7,8 @@ class MessagesController < ApplicationController
   # GET /messages.json
   # GET /messages/inbox
   def index
-    @unread_messages = Message.where(recipient: current_user, read: false)
-    @read_messages = Message.where(recipient: current_user, read: true)
+    @unread_messages = Message.where(recipient: current_user, read: false, deleted_by_recipient: false)
+    @read_messages = Message.where(recipient: current_user, read: true, deleted_by_recipient: false)
   end
 
   # GET /messages/1
@@ -63,6 +63,30 @@ class MessagesController < ApplicationController
 
   # DELETE /messages/1
   # DELETE /messages/1.json
+  def delete
+    set_message
+
+    if @message.sender == current_user
+      if @message.deleted_by_recipient
+        destroy
+      else
+        @message.deleted_by_sender = true
+        @message.save
+      end
+    end
+
+    if @message.recipient == current_user
+      if @message.deleted_by_sender
+        destroy
+      else
+        @message.deleted_by_recipient = true
+        @message.save
+        
+        redirect_to inbox_messages_path
+      end
+    end
+  end
+
   def destroy
     @message.destroy
     respond_to do |format|

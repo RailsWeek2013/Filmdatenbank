@@ -24,7 +24,7 @@
           <td><%= link_to 'lesen', message %></td>
 
           <!-- TODO -->
-          <td><%= link_to 'löschen(TODO)', inbox_messages_path %></td>
+          <td><%= link_to 'löschen(TODO)', delete_message_path%></td>
         </tr>
       <% end %>
     </tbody>
@@ -60,7 +60,7 @@
           <td><%= link_to 'lesen', message %></td>
 
           <!-- TODO -->
-          <td><%= link_to 'löschen(TODO)', inbox_messages_path %></td>
+          <td><%= link_to 'löschen(TODO)', delete_message_path(message.id), method: :delete %></td>
         </tr>
       <% end %>
     </tbody>
