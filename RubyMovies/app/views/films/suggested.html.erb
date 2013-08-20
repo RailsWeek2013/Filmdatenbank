@@ -1,5 +1,8 @@
-<h2>Vorgeschlagene Filme/h2>
+<h2>Vorgeschlagene Filme</h2>
 
+<% if @films.empty? %>
+<p>Zur Zeit keine vorgeschlagenen Filme vorhanden.</p>
+<% else %>
 <table>
   <tbody>
     <% @films.each do |film| %>
@@ -18,7 +21,7 @@
 
           <!-- TODO Folgende Links in Abhaengingkeit zur Rolle des Users -->
           <br />
-          <!-- <%= link_to "In Filmliste aufnehmen", controller: "films", action: "set-active", id: film %> -->
+          <%= link_to "In Filmliste aufnehmen", active_film_url(film.id), method: :post %>
           <%= link_to 'Bearbeiten', edit_film_path(film) %>
           <%= link_to 'Entfernen (ADMIN)', film, method: :delete, data: { confirm: 'Sind Sie sicher?' } %>
         </td>
@@ -26,3 +29,4 @@
     <% end %>
   </tbody>
 </table>
+<% end %>

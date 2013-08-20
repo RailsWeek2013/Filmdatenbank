@@ -13,9 +13,12 @@ RubyMovies::Application.routes.draw do
   get "films/top", to: "films#top", as: "films_top"
   post "films/:fid/review/:rid", to: "films#review", as: "film_review"
   get "/films/suggested", to: "films#suggested", as: "suggested_films"
-  get "/films/set-active", to: "films#set-active", as: "active"
+  resources :films do
+    member do
+      post "active"
+    end
+  end
   resources :films
-
   get "users/list", as: "manageUser"
   
   devise_for :users, :controllers => { :registrations => "registrations" }

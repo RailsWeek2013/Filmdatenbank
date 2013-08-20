@@ -94,6 +94,13 @@ class FilmsController < ApplicationController
     @active_films = Film.where(active: true).order('average DESC')
   end
 
+  def active
+    f = Film.find(params[:id])
+    f.active = true
+    f.save
+    redirect_to suggested_films_url
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_film
