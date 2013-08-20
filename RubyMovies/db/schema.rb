@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20130819201811) do
     t.string   "link"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "active"
+    t.boolean  "active",      default: false
     t.float    "average"
   end
 

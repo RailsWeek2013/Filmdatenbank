@@ -1,5 +1,6 @@
 RubyMovies::Application.routes.draw do
 
+  get "messages/outbox", to: "messages#outbox", as: "outbox_messages"
   get "messages/inbox", to: "messages#index", as: "inbox_messages"
   delete "messages/:id", to: "messages#delete", as: "delete_message"
   resources :messages
@@ -7,7 +8,7 @@ RubyMovies::Application.routes.draw do
   get 'tags/:tag', to: 'films#index', as: :tag
   
   delete "comments/destroy/:id", to: "comments#destroy", as: "comments_destroy"
-  
+
   get "films/top", to: "films#top", as: "films_top"
   post "films/:fid/review/:rid", to: "films#review", as: "film_review"
   get "/films/suggested", to: "films#suggested", as: "suggested_films"

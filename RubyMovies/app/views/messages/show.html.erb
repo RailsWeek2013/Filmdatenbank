@@ -1,17 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Sender:</strong>
-  <%= @message.sender_id %>
+  <strong>Von:</strong>
+  <%= @message.sender.name %>
 </p>
 
 <p>
-  <strong>Recipient:</strong>
-  <%= @message.recipient_id %>
-</p>
-
-<p>
-  <strong>Subject:</strong>
+  <strong>Betreff:</strong>
   <%= @message.subject %>
 </p>
 
@@ -20,20 +15,8 @@
   <%= @message.text %>
 </p>
 
-<p>
-  <strong>Read:</strong>
-  <%= @message.read %>
-</p>
-
-<p>
-  <strong>Deleted by sender:</strong>
-  <%= @message.deleted_by_sender %>
-</p>
-
-<p>
-  <strong>Deleted by recipient:</strong>
-  <%= @message.deleted_by_recipient %>
-</p>
-
-<%= link_to 'Edit', edit_message_path(@message) %> |
-<%= link_to 'Back', messages_path %>
+<% if current_user == @message.recipient %>
+  <%= link_to 'Back', messages_path %>
+<% else %>
+  <%= link_to 'Back', outbox_messages_path %>
+<% end %>

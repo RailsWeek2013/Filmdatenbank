@@ -1,3 +1,5 @@
+<%= link_to 'Postausgang', outbox_messages_path %>
+<%= link_to 'Neue Nachricht', new_message_path %>
 <h1>Posteingang</h1>
 
 
@@ -23,8 +25,7 @@
           <td><%= message.subject %></td>
           <td><%= link_to 'lesen', message %></td>
 
-          <!-- TODO -->
-          <td><%= link_to 'löschen(TODO)', delete_message_path%></td>
+          <td><%= link_to 'löschen', delete_message_path(message.id), method: :delete %></td>
         </tr>
       <% end %>
     </tbody>
@@ -59,8 +60,7 @@
           <td><%= message.subject %></td>
           <td><%= link_to 'lesen', message %></td>
 
-          <!-- TODO -->
-          <td><%= link_to 'löschen(TODO)', delete_message_path(message.id), method: :delete %></td>
+          <td><%= link_to 'löschen', delete_message_path(message.id), method: :delete %></td>
         </tr>
       <% end %>
     </tbody>

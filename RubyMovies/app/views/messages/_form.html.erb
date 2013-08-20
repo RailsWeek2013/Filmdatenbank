@@ -12,12 +12,9 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :sender_id %><br>
-    <%= f.number_field :sender_id %>
-  </div>
-  <div class="field">
-    <%= f.label :recipient_id %><br>
-    <%= f.number_field :recipient_id %>
+    <p>An:
+      <%= f.collection_select(:recipient_id, User.where.not(name: current_user.name), :id, :name ) %>
+    </p>
   </div>
   <div class="field">
     <%= f.label :subject %><br>
@@ -25,19 +22,7 @@
   </div>
   <div class="field">
     <%= f.label :text %><br>
-    <%= f.text_field :text %>
-  </div>
-  <div class="field">
-    <%= f.label :read %><br>
-    <%= f.check_box :read %>
-  </div>
-  <div class="field">
-    <%= f.label :deleted_by_sender %><br>
-    <%= f.check_box :deleted_by_sender %>
-  </div>
-  <div class="field">
-    <%= f.label :deleted_by_recipient %><br>
-    <%= f.check_box :deleted_by_recipient %>
+    <%= f.text_area :text %>
   </div>
   <div class="actions">
     <%= f.submit %>
