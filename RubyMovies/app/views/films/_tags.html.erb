@@ -1,0 +1,7 @@
+<!-- http://railscasts.com/episodes/382-tagging -->
+<strong>Tags:</strong> 
+<% if @film.tag_list.empty? %>
+Keine Tags vorhanden
+<% else %>
+<%= raw @film.tag_list.map { |t| link_to t, tag_path(t)}.join(', ') %>
+<% end %>

@@ -20,16 +20,22 @@
     <%= f.text_field :tag_list %>
   </div>
   <div class="field">
-    <%= f.label :picture %><br>
-    <%= f.file_field :picture %>
-  </div>
-  <div class="field">
     <%= f.label :description %><br>
     <%= f.text_field :description %>
   </div>
   <div class="field">
     <%= f.label :link %><br>
     <%= f.text_field :link %>
+  </div>
+  <div class="field">
+    <%= f.label :picture %><br>
+    <%= f.file_field :picture %>
+  </div>
+  <% unless params[:id].nil? %>
+    <div class="field">
+      <%= f.label :remove_picture %>
+      <%= f.check_box :remove_picture %>
+ <% end %>
   </div>
   <% if moderator_signed_in? || admin_signed_in? %>
     <div class="field">

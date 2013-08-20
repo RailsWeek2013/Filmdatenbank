@@ -14,7 +14,7 @@
 
       <tr>
         <td>
-          <img height=200px src= <%= film.picture %> alt="Test"></img>
+            <%= image_tag(film.picture, height:'110', width:'95') %>
         </td>
         <td>
           <%= link_to 'Details', film %>

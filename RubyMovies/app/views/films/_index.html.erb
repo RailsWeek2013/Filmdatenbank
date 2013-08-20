@@ -1,33 +1,21 @@
+<div id="filme">
 <table>
   <tbody>
     <% @active_films.each do |film| %>
       <tr>
         <td>
-          <%= film.title %>
-        </td>
-      </tr>
-
-      <tr>
-        <td>
-          <img height=200px src= <%= film.picture %> alt="Test"></img>
+          <%= image_tag(film.picture, height:'110', width:'95') %>
         </td>
         <td>
-          <% if film.average == nil %>
-            Keine Bewertung
-          <% else %>
-            <%= film.average %>
-          <% end %>
-        </td>
-        <td>
-          <!-- http://railscasts.com/episodes/382-tagging -->
-          Tags: <% if film.tag_list.empty? %>
-                  Keine Tags vorhanden
-                <% else %>
-                  <%= raw film.tag_list.map { |t| link_to t, tag_path(t)}.join(', ') %>
-                <% end %>
-        </td>
-        <td>
+          <strong><%= film.title %></strong>
+          <br />
+          <% @film = film %>
+          <%= render 'review' %>
+          <br />
+          <%= render 'tags' %>
+          <br />
           <%= link_to 'Details', film %>
+          <br />
           <br />
           <% if user_signed_in? %>
             <% if current_user.admin? || current_user.moderator? %>
@@ -42,10 +30,8 @@
     <% end %>
   </tbody>
 </table>
+</div>
   <div id="cloud">
     <h3>Filme nach Kategorien</h3>
-    <!-- http://railscasts.com/episodes/382-tagging -->
-    <% tag_cloud Film.tag_counts, %w[xs s m l xl] do |tag, css| %>
-      <%= link_to tag.name, tag_path(tag.name), class: css %>
-    <% end %>
+    <%= render 'cloud' %>
   </div>

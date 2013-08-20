@@ -1,0 +1,8 @@
+Durchschnittsbewertung:
+<%  if @film.average.nil?
+        d = "Keine Bewertung"
+      else
+        d = @film.average 
+      end %>
+
+<%= d %>

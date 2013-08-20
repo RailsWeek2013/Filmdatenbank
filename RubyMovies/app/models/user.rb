@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
 
 	belongs_to :role
 
+	validates :name, presence: true
+	validates_uniqueness_of :name
 
 	def admin?
 		self.role.name == "Admin"
