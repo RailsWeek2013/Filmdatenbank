@@ -23,7 +23,7 @@
           <br />
           <%= link_to "In Filmliste aufnehmen", active_film_url(film.id), method: :post %>
           <%= link_to 'Bearbeiten', edit_film_path(film) %>
-          <%= link_to 'Entfernen (ADMIN)', film, method: :delete, data: { confirm: 'Sind Sie sicher?' } %>
+          <%= link_to 'Entfernen', film, method: :delete, data: { confirm: 'Sind Sie sicher?' } %>
         </td>
       </tr>
     <% end %>

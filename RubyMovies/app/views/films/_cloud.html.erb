@@ -1,4 +1,4 @@
 <!-- http://railscasts.com/episodes/382-tagging -->
-    <% tag_cloud Film.tag_counts, %w[xs s m l xl] do |tag, css| %>
-      <%= link_to tag.name, tag_path(tag.name), class: css %>
-    <% end %>
+<% tag_cloud Film.where(active: true).tag_counts, %w[xs s m l xl] do |tag, css| %>
+	<%= link_to tag.name, tag_path(tag.name), class: css %>
+<% end %>
