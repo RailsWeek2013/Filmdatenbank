@@ -19,15 +19,22 @@
           <% end %>
         </td>
         <td>
+          <!-- http://railscasts.com/episodes/382-tagging -->
+          Tags: <% if film.tag_list.empty? %>
+                  Keine Tags vorhanden
+                <% else %>
+                  <%= raw film.tag_list.map { |t| link_to t, tag_path(t)}.join(', ') %>
+                <% end %>
+        </td>
+        <td>
           <%= link_to 'Details', film %>
-
           <br />
           <% if user_signed_in? %>
             <% if current_user.admin? || current_user.moderator? %>
-              <%= link_to 'Bearbeiten (MODERATOR/ADMIN)', edit_film_path(film) %>
+              <%= link_to 'Bearbeiten', edit_film_path(film) %>
             <% end %>
             <% if current_user.admin? %>
-              <%= link_to 'Entfernen (ADMIN)', film, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <%= link_to 'Entfernen', film, method: :delete, data: { confirm: 'Sind Sie sicher?' } %>
             <% end %>
           <% end %>
         </td>
@@ -35,3 +42,10 @@
     <% end %>
   </tbody>
 </table>
+  <div id="cloud">
+    <h3>Filme nach Kategorien</h3>
+    <!-- http://railscasts.com/episodes/382-tagging -->
+    <% tag_cloud Film.tag_counts, %w[xs s m l xl] do |tag, css| %>
+      <%= link_to tag.name, tag_path(tag.name), class: css %>
+    <% end %>
+  </div>

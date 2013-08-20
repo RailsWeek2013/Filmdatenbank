@@ -9,6 +9,7 @@
 <body>
 	<h1><%= link_to "RubyMovies", root_path %></h1>
 	<%= link_to "Alle Filme", root_path %>
+	<%= link_to 'Top-Filme', films_top_path %>
 	<% if user_signed_in? %>
             <% if current_user.admin? || current_user.moderator? %>
             	<%= link_to "Vorgeschlagene Filme", suggested_films_url %>

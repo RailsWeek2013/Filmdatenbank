@@ -52,3 +52,6 @@ gem 'devise'
 
 # Cancan
 gem 'cancan'
+
+# Tagging-System
+gem 'acts-as-taggable-on'

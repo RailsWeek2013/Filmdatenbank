@@ -6,7 +6,11 @@ class FilmsController < ApplicationController
   # GET /films
   # GET /films.json
   def index
-    @active_films = Film.where(active: true)
+    if params[:tag]
+      @active_films = Film.tagged_with(params[:tag]) 
+    else
+       @active_films = Film.where(active: true)
+    end
   end
 
   # GET /films/suggested
@@ -98,7 +102,7 @@ class FilmsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def film_params
-      params.require(:film).permit(:title, :picture, :description, :link, :active)
+      params.require(:film).permit(:title, :tag_list, :picture, :description, :link, :active)
     end
 
     def update_average film
