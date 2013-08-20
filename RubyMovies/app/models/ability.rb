@@ -11,6 +11,7 @@ class Ability
     else
         if user.moderator?
             can :manage, Film
+            can :manage, Message
         else
             if user.user?
                 can :create, Film
@@ -18,7 +19,7 @@ class Ability
                 can :review, Film
                 can :create, Comment
                 can :read, Comment
-                can :read, Message
+                can :manage, Message
             else
                 can :read, :all
             end
