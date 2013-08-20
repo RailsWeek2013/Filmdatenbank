@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   authorize_resource
 
-
   def promote
   	@user = User.find(params[:id])
   end
@@ -20,9 +19,10 @@ class UsersController < ApplicationController
     @user = User.all.find(params[:id])
     if @user.update_attributes(user_params)
       redirect_to :back,
-      notice: "Favorit wurde erfolgreich geändert."
+      notice: "Der Benutzer wurde erfolgreich geändert."
     else
-      render action: "edit"
+      redirect_to :back,
+      notice: "Es ist ein Problem beim Speichern des Benutzers aufgetreten."
     end
   end
 
@@ -34,13 +34,6 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
-
-  #def delete
-  #  user = User.all.find(params[:id])
-  #  user.delete
-  #  redirect_to manageUser_url,
-  #  notice: "Favorit wurde erfolgreich gelöscht."
-  #end
 
   private
   def user_params
