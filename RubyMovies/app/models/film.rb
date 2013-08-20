@@ -9,6 +9,9 @@ class Film < ActiveRecord::Base
 	#make picture upload work
 	mount_uploader :picture, PictureUploader
 
+	#http://stackoverflow.com/questions/5331014/check-if-given-string-is-an-url
+	validates :link, :format => URI::regexp(%w(http https))
+
 	#make films taggable
 	acts_as_taggable
 end
