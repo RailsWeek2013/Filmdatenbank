@@ -1,5 +1,6 @@
 RubyMovies::Application.routes.draw do
 
+  get "messages/new/:mid", to: "messages#new", as: "message_respond"
   get "messages/outbox", to: "messages#outbox", as: "outbox_messages"
   get "messages/inbox", to: "messages#index", as: "inbox_messages"
   delete "messages/:id", to: "messages#delete", as: "delete_message"

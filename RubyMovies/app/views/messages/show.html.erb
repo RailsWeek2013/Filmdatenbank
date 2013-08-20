@@ -12,10 +12,11 @@
 
 <p>
   <strong>Text:</strong>
-  <%= @message.text %>
+  <%= simple_format @message.text %>
 </p>
 
 <% if current_user == @message.recipient %>
+  <%= link_to 'Antworten', message_respond_path(@message.id) %>
   <%= link_to 'Back', messages_path %>
 <% else %>
   <%= link_to 'Back', outbox_messages_path %>

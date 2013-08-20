@@ -30,6 +30,12 @@ class MessagesController < ApplicationController
   # GET /messages/new
   def new
     @message = Message.new
+    if params[:mid] != nil
+      m = Message.find(params[:mid])
+      @message.recipient = m.sender
+      @message.subject = "AW: #{m.subject}"
+      @message.text = "\n----------\n#{m.text}"
+    end
   end
 
   # GET /messages/1/edit
