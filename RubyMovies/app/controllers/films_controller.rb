@@ -9,9 +9,9 @@ class FilmsController < ApplicationController
     if params[:tag]
       @active_films = Film.tagged_with(params[:tag]) 
     else
-       @active_films = Film.where(active: true)
-    end
-  end
+     @active_films = Film.where(active: true)
+   end
+ end
 
   # GET /films/suggested
   def suggested
@@ -20,10 +20,17 @@ class FilmsController < ApplicationController
 
   # GET /films/1
   # GET /films/1.json
+  #http://stackoverflow.com/questions/10351730/embed-youtube-video-into-rails-app
   def show
     @film = Film.find(params[:id])
     @comments = Comment.where(film: @film)
+    if @film.link?
+      if @film.link.include? "youtube.com"
+        @video = @film.link.split('=').last
+      end
+    end
   end
+
 
   # GET /films/new
   def new
@@ -129,4 +136,4 @@ class FilmsController < ApplicationController
       film.average = (summe  / count).round(2)
       film.save
     end
-end
+  end
