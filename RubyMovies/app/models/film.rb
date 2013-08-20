@@ -10,7 +10,7 @@ class Film < ActiveRecord::Base
 	mount_uploader :picture, PictureUploader
 
 	#http://stackoverflow.com/questions/5331014/check-if-given-string-is-an-url
-	validates :link, :format => URI::regexp(%w(http https))
+	validates :link, :format => URI::regexp(%w(http https)), :allow_blank => true
 
 	#make films taggable
 	acts_as_taggable
