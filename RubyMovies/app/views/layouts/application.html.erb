@@ -7,24 +7,27 @@
 	<%= csrf_meta_tags %>
 </head>
 <body>
-	<h1><%= link_to "RubyMovies", root_path %></h1>
-	<%= link_to "Alle Filme", root_path %>
-	<%= link_to 'Top-Filme', films_top_path %>
+	<h1>RubyMovies</h1>
+	<%= link_to_unless_current "Alle Filme", root_path %>
+	<%= link_to_unless_current 'Top-Filme', films_top_path %>
 	<% if user_signed_in? %>
             <% if current_user.admin? || current_user.moderator? %>
-            	<%= link_to "Vorgeschlagene Filme", suggested_films_url %>
+            	<%= link_to_unless_current "Vorgeschlagene Filme", suggested_films_url %>
             	 <% s = "Film hinzufügen" 
              else 
             	 s = "Film vorschlagen" 
              end %>
-            <%= link_to s, new_film_path %>
+            <%= link_to_unless_current s, new_film_path %>
+            <% 	if current_page?(controller: 'messages', action: 'outbox') || current_page?(controller: 'messages', action: 'new') || current_page?(controller: 'messages', action: 'index')
+            		disabled = true
+            	end %> 
+            <%= link_to_unless(disabled, "Nachrichten(#{new_message_count})", inbox_messages_path) %>
             <% if admin_signed_in? %>
-            	<%= link_to('Administration', manageUser_url) %>
+            	<%= link_to_unless_current('Administration', manageUser_url) %>
             <% end %>
-            <%= link_to("Nachrichten(#{new_message_count})", inbox_messages_path) %>
-            <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+            <%= link_to_unless_current('Logout', destroy_user_session_path, :method => :delete) %>
 	<% else %>
-		<%= link_to('Registrierung', new_user_registration_url)  %>	
+		<%= link_to_unless_current('Registrierung', new_user_registration_url)  %>	
 		<%= link_to('Login', new_user_session_url)  %>	
 	<% end %>
 	<p class="notice"><%= notice %></p>
