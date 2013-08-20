@@ -16,6 +16,7 @@ RubyMovies::Application.routes.draw do
   resources :films do
     member do
       post "active"
+      delete "rempicture"
     end
   end
   resources :films

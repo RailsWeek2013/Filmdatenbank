@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br>
+    <%= f.label :title, "Titel" %><br>
     <%= f.text_field :title %>
   </div>
     <div class="field">
@@ -20,23 +20,30 @@
     <%= f.text_field :tag_list %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
+    <%= f.label :description, "Beschreibung" %><br>
     <%= f.text_field :description %>
   </div>
   <div class="field">
-    <%= f.label :link %><br>
+    <%= f.label :link, "Link" %><br>
     <%= f.text_field :link %>
   </div>
   <div class="field">
-    <%= f.label :picture %><br>
+    <label>Bild</label>
+    <br />
+    <%= image_tag(@film.picture_url, height:'110', width:'95') if @film.picture? %>
+    <br/>
+    Neues Bild:
+    <br />
     <%= f.file_field :picture %>
   </div>
   <% unless params[:id].nil? %>
     <div class="field">
-      <%= f.label :remove_picture %>
-      <%= f.check_box :remove_picture %>
- <% end %>
-  </div>
+      <% if @film.picture? %>
+        <%= link_to "Bild löschen", rempicture_film_path(@film), method: :delete %>
+      <% end %>
+    </div>
+  <% end %>
+  
   <% if moderator_signed_in? || admin_signed_in? %>
     <div class="field">
       <%= f.label :active %>

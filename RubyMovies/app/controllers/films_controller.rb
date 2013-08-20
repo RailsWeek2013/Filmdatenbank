@@ -101,6 +101,14 @@ class FilmsController < ApplicationController
     redirect_to suggested_films_url
   end
 
+  def rempicture
+    set_film
+    @film.remove_picture!
+    @film.picture = nil
+    @film.save
+    redirect_to edit_film_path(@film)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_film
