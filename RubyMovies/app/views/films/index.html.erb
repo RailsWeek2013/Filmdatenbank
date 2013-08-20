@@ -1,4 +1,8 @@
-<h2>Alle Filme</h2>
+<% if params[:tag] %>
+	<h2>Alle Filme mit Tag: <%= params[:tag] %></h2>
+<% else %>
+	<h2>Alle Filme</h2>
+<% end %>
 
 <%= link_to 'Top-Filme', films_top_path %>
 <%= render 'index' %>

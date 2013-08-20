@@ -20,8 +20,18 @@
   <%= @film.link %>
 </p>
 
+<!-- http://railscasts.com/episodes/382-tagging -->
+<p><strong>Tags:</strong> 
+    <% if @film.tag_list.empty? %>
+        Keine Tags vorhanden
+      <% else %>
+        <%= raw @film.tag_list.map { |t| link_to t, tag_path(t)}.join(', ') %>
+      <% end %>
+</p>
+
 <%= link_to 'Edit', edit_film_path(@film) %> |
 <%= link_to 'Back', films_path %>
+
 <p>Durchschnittsbewertung:
   <%  if @film.average == nil
         d = "Keine Bewertung"
