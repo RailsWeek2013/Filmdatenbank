@@ -7,7 +7,7 @@ class FilmsController < ApplicationController
   # GET /films.json
   def index
     if params[:tag]
-      @active_films = Film.tagged_with(params[:tag]) 
+      @active_films = Film.where(active: true).tagged_with(params[:tag]) 
     else
      @active_films = Film.where(active: true)
    end
@@ -22,15 +22,15 @@ class FilmsController < ApplicationController
   # GET /films/1.json
   #http://stackoverflow.com/questions/10351730/embed-youtube-video-into-rails-app
   def show
+    @comment = Comment.new
     @film = Film.find(params[:id])
-    @comments = Comment.where(film: @film)
+    @comments = Comment.where(film: @film).order(created_at: :desc)
     if @film.link?
       if @film.link.include? "youtube.com"
         @video = @film.link.split('=').last
       end
     end
   end
-
 
   # GET /films/new
   def new
@@ -48,7 +48,7 @@ class FilmsController < ApplicationController
 
     respond_to do |format|
       if @film.save
-        format.html { redirect_to @film, notice: 'Film was successfully created.' }
+        format.html { redirect_to @film, notice: 'Der Film wurde erfolgreich erstellt.' }
         format.json { render action: 'show', status: :created, location: @film }
       else
         format.html { render action: 'new' }
@@ -62,7 +62,7 @@ class FilmsController < ApplicationController
   def update
     respond_to do |format|
       if @film.update(film_params)
-        format.html { redirect_to @film, notice: 'Film was successfully updated.' }
+        format.html { redirect_to @film, notice: 'Der Film wurde erfolgreich aktualisiert.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -89,11 +89,10 @@ class FilmsController < ApplicationController
     r.user = current_user
     if r.save
       update_average f
-      redirect_to film_url(f)
-      #notice: "Bewertung wurde gespeichert!"
+      redirect_to film_url(f), notice: "Die Bewertung wurde gespeichert!"
     else
       redirect_to film_url(f),
-      notice: "Bewertung wurde nicht gespeichert!"
+      notice: "Die Bewertung wurde nicht gespeichert!"
     end
   end
 
@@ -116,6 +115,19 @@ class FilmsController < ApplicationController
     redirect_to edit_film_path(@film)
   end
 
+  def createcomment
+    @film = set_film
+    @comment = Comment.new(comment_params)
+    @comment.film = @film
+    @comment.user = current_user
+    if @comment.save
+      redirect_to film_url(@film),
+      notice: "Kommentar wurde gespeichert!"
+    else
+      render "new"
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_film
@@ -127,6 +139,7 @@ class FilmsController < ApplicationController
       params.require(:film).permit(:title, :tag_list, :picture, :description, :link, :active)
     end
 
+    #Berechnung der Durchschnittsbewertung für einen Film.
     def update_average film
       count = film.reviews.size
       summe = 0.0
@@ -135,5 +148,9 @@ class FilmsController < ApplicationController
       end
       film.average = (summe  / count).round(2)
       film.save
+    end
+
+    def comment_params
+      params.require(:comment).permit(:text)
     end
   end

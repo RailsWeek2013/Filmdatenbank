@@ -15,7 +15,8 @@ class CommentsController < ApplicationController
       redirect_to film_url(@film),
       notice: "Kommentar wurde gespeichert!"
   	else
-  		render "new"
+  		redirect_to film_url(@film),
+      notice: "Es ist ein Problem beim Speichern des Kommentars aufgetreten!"
   	end
   end
 

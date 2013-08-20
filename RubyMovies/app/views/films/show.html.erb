@@ -43,7 +43,7 @@
     <% end %>
 <% end %>
 </p>
-
+<%= render 'comment' %>
 <%= link_to 'Kommentar hinzufügen', new_film_comment_path(@film) %>
 <h3>Kommentare:</h3>
 <% if @comments.empty? %>
