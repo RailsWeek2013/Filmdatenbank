@@ -1,0 +1,31 @@
+<% unless @messages.empty? %>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Von</th>
+        <th>Datum</th>
+        <th>Betreff</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @messages.each do |message| %>
+        <tr>
+          <td><%= message.sender.name %></td>
+          <td><%= message.created_at.to_formatted_s(:db) %></td>
+          <td><%= message.subject %></td>
+          <td><%= link_to 'lesen', message %></td>
+
+          <td><%= link_to 'löschen', delete_message_path(message.id), method: :delete %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% else %>
+  <%= @error %>
+
+<% end %>

@@ -3,70 +3,15 @@
 
 
 <h2>Ungelesene Nachrichten</h2>
-<% unless @unread_messages.empty? %>
+<% @messages = @unread_messages 
+   @error = "Keine ungelesenen Nachrichten vorhanden." %>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Von</th>
-        <th>Datum</th>
-        <th>Betreff</th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @unread_messages.each do |message| %>
-        <tr>
-          <td><%= message.sender.name %></td>
-          <td><%= message.created_at.to_formatted_s(:db) %></td>
-          <td><%= message.subject %></td>
-          <td><%= link_to 'lesen', message %></td>
-
-          <td><%= link_to 'löschen', delete_message_path(message.id), method: :delete %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-<% else %>
-
-  Keine ungelesen Nachrichten vorhanden.
-
-<% end %>
-
+<%= render 'messages' %>
 
 <h2>Gelesene Nachrichten</h2>
-<% unless @read_messages.empty? %>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Von</th>
-        <th>Datum</th>
-        <th>Betreff</th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
+<% @messages = @read_messages 
+   @error = "Keine schon gelesenen Nachrichten vorhanden." %>
 
-    <tbody>
-      <% @read_messages.each do |message| %>
-        <tr>
-          <td><%= message.sender.name %></td>
-          <td><%= message.created_at.to_formatted_s(:db) %></td>
-          <td><%= message.subject %></td>
-          <td><%= link_to 'lesen', message %></td>
+<%= render 'messages' %>
 
-          <td><%= link_to 'löschen', delete_message_path(message.id), method: :delete %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-<% else %>
-
-  Keine schon gelesenen Nachrichten vorhanden.
-
-<% end %>
