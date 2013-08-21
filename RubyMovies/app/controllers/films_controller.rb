@@ -7,15 +7,15 @@ class FilmsController < ApplicationController
   # GET /films.json
   def index
     if params[:tag]
-      @active_films = Film.where(active: true).tagged_with(params[:tag]) 
+      @active_films = Film.where(active: true).tagged_with(params[:tag]).page params[:page]
     else
-     @active_films = Film.where(active: true)
+     @active_films = Film.where(active: true).page params[:page]
    end
  end
 
   # GET /films/suggested
   def suggested
-    @films = Film.where(active: false)
+    @films = Film.where(active: false).page params[:page]
   end
 
   # GET /films/1
@@ -24,7 +24,7 @@ class FilmsController < ApplicationController
   def show
     @comment = Comment.new
     @film = Film.find(params[:id])
-    @comments = Comment.where(film: @film).order(created_at: :desc)
+    @comments = Comment.where(film: @film).order(created_at: :desc).page params[:page]
     if @film.link?
       if @film.link.include? "youtube.com"
         @video = @film.link.split('=').last

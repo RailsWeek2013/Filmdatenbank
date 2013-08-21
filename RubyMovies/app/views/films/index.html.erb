@@ -3,5 +3,9 @@
 <% else %>
 	<h2>Alle Filme</h2>
 <% end %>
-
 <%= render 'index' %>
+<%= paginate @active_films %>
+<div id="cloud">
+  <h3>Filme nach Kategorien</h3>
+  <%= render 'cloud' %>
+</div>
