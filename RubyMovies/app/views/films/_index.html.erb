@@ -4,7 +4,7 @@
     <% @active_films.each do |film| %>
       <tr>
         <td>
-          <%= image_tag(film.picture, height:'110', width:'95') %>
+          <%= image_tag(film.picture) %>
         </td>
         <td>
           <strong><%= film.title %></strong>

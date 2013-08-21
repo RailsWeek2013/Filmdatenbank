@@ -1,3 +1,9 @@
+GIT
+  remote: http://github.com/rmagick/rmagick.git
+  revision: 962d56cba3a132d590be1dd062f2a3a2efa48545
+  specs:
+    rmagick (2.13.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -142,6 +148,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   rails (= 4.0.0)
+  rmagick (= 2.13.2)!
   sass-rails (~> 4.0.0)
   sdoc
   sqlite3
