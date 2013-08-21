@@ -4,10 +4,10 @@
 <h2>Ungelesene Nachrichten</h2>
 
 <%= render :partial => "messages", :locals => { :messages => @unread_messages, :error => "Keine ungelesenen Nachrichten vorhanden.", :sender => true } %>
-
+<%= paginate @unread_messages %>
 
 <h2>Gelesene Nachrichten</h2>
 
 <%= render :partial => "messages", :locals => { :messages => @read_messages, :error => "Keine schon gelesenen Nachrichten vorhanden.", :sender => true } %>
-
+<%= paginate @read_messages %>
 

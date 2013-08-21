@@ -7,13 +7,13 @@ class MessagesController < ApplicationController
   # GET /messages.json
   # GET /messages/inbox
   def index
-    @unread_messages = Message.where(recipient: current_user, read: false, deleted_by_recipient: false)
-    @read_messages = Message.where(recipient: current_user, read: true, deleted_by_recipient: false)
+    @unread_messages = Message.where(recipient: current_user, read: false, deleted_by_recipient: false).order(created_at: :desc).page params[:page]
+    @read_messages = Message.where(recipient: current_user, read: true, deleted_by_recipient: false).order(created_at: :desc).page params[:page]
   end
 
   # GET /messages/outbox
   def outbox
-    @messages = Message.where(sender: current_user, deleted_by_sender: false)
+    @messages = Message.where(sender: current_user, deleted_by_sender: false).order(created_at: :desc).page params[:page]
   end
 
   # GET /messages/1

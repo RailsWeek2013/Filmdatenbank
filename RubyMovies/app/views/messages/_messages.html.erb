@@ -3,7 +3,11 @@
   <table>
     <thead>
       <tr>
-        <th>Von</th>
+        <% if sender %>
+          <th>Von</th>
+        <% else %>
+          <th>An</th>
+        <% end %>
         <th>Datum</th>
         <th>Betreff</th>
         <th></th>

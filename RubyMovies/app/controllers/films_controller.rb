@@ -97,7 +97,7 @@ class FilmsController < ApplicationController
   end
 
   def top
-    @active_films = Film.where(active: true).order('average DESC')
+    @active_films = Film.where(active: true).order('average DESC').page params[:page]
   end
 
   def active

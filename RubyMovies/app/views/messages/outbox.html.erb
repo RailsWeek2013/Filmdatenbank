@@ -4,3 +4,5 @@
 <h2>Gesendete Nachrichten</h2>
 
 <%= render :partial => "messages", :locals => { :messages => @messages, :error => "Keine gesendeten Nachrichten vorhanden.", :sender => false } %>
+
+<%= paginate @messages %>
