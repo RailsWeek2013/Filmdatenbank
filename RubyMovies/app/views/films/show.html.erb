@@ -52,6 +52,8 @@
 <br/>
 <% @comments.each do |comment| %>
 	Von: <%= comment.user.name %>
+  <br />
+  Datum: <%= comment.created_at.to_formatted_s(:db) %>
 	<p><%= comment.text %></p>
   <% if admin_signed_in? || moderator_signed_in? %>
     <%= link_to 'Kommentar löschen', comments_destroy_path(comment), method: :delete %>
