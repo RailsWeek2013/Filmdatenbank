@@ -56,6 +56,9 @@ gem 'cancan'
 # Tagging-System
 gem 'acts-as-taggable-on'
 
+# RMagick (braucht für Ubuntu und vielleicht andere Systeme eine Bibliothek: "sudo apt-get install libmagickwand-dev")
+gem 'rmagick', '2.13.2', :git=>'http://github.com/rmagick/rmagick.git'
+
 gem 'better_errors'
 
 gem 'binding_of_caller'
