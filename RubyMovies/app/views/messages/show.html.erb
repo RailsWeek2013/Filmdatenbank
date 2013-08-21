@@ -1,5 +1,4 @@
-<p id="notice"><%= notice %></p>
-
+<%= render 'link' %>
 <p>
   <strong>Von:</strong>
   <%= @message.sender.name %>
@@ -17,7 +16,7 @@
 
 <% if current_user == @message.recipient %>
   <%= link_to 'Antworten', message_respond_path(@message.id) %>
-  <%= link_to 'Back', messages_path %>
+  <%= link_to 'Back', inbox_messages_path %>
 <% else %>
   <%= link_to 'Back', outbox_messages_path %>
 <% end %>

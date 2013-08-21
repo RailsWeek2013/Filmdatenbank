@@ -46,7 +46,6 @@
 <% if user_signed_in? %>
    <%= render 'comment' %>
 <% end %>
-<%= link_to 'Kommentar hinzufügen', new_film_comment_path(@film) %>
 <h3>Kommentare:</h3>
 <% if @comments.empty? %>
 	<p>Keine Kommentare vorhanden!</p>

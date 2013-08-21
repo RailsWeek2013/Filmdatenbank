@@ -1,17 +1,13 @@
 <%= render 'link' %>
 <h1>Posteingang</h1>
 
-
 <h2>Ungelesene Nachrichten</h2>
-<% @messages = @unread_messages 
-   @error = "Keine ungelesenen Nachrichten vorhanden." %>
 
-<%= render 'messages' %>
+<%= render :partial => "messages", :locals => { :messages => @unread_messages, :error => "Keine ungelesenen Nachrichten vorhanden.", :sender => true } %>
+
 
 <h2>Gelesene Nachrichten</h2>
 
-<% @messages = @read_messages 
-   @error = "Keine schon gelesenen Nachrichten vorhanden." %>
+<%= render :partial => "messages", :locals => { :messages => @read_messages, :error => "Keine schon gelesenen Nachrichten vorhanden.", :sender => true } %>
 
-<%= render 'messages' %>
 

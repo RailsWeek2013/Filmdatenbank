@@ -1,4 +1,4 @@
-<% unless @messages.empty? %>
+<% unless messages.empty? %>
 
   <table>
     <thead>
@@ -12,9 +12,13 @@
     </thead>
 
     <tbody>
-      <% @messages.each do |message| %>
+      <% messages.each do |message| %>
         <tr>
-          <td><%= message.sender.name %></td>
+          <% if sender %>
+            <td><%= message.sender.name %></td>
+          <% else %>
+            <td><%= message.recipient.name %></td>
+          <% end %>
           <td><%= message.created_at.to_formatted_s(:db) %></td>
           <td><%= message.subject %></td>
           <td><%= link_to 'lesen', message %></td>
@@ -26,6 +30,6 @@
   </table>
 
 <% else %>
-  <%= @error %>
+  <%= error %>
 
 <% end %>
