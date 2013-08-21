@@ -19,9 +19,14 @@ class Ability
                 can :review, Film
                 can :create, Comment
                 can :read, Comment
-                can :manage, Message
+                can :create, Message
+                can :read, Message
+                can :delete, Message
+                can :update, Message
             else
-                can :read, :all
+                can :read, Film
+                can :top, Film
+                can :read, Comment
             end
         end
     end

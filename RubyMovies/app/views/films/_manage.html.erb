@@ -1,0 +1,4 @@
+<% if admin_signed_in? || moderator_signed_in? %>
+  <%= link_to 'Bearbeiten', edit_film_path(@film) %> |
+  <%= link_to 'Entfernen', @film, method: :delete, data: { confirm: 'Sind Sie sicher?' } %>
+<% end %>

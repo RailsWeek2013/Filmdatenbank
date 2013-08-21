@@ -6,6 +6,7 @@ class FilmsController < ApplicationController
   # GET /films
   # GET /films.json
   def index
+    @index = true
     if params[:tag]
       @active_films = Film.where(active: true).tagged_with(params[:tag]).page params[:page]
     else
@@ -97,6 +98,7 @@ class FilmsController < ApplicationController
   end
 
   def top
+    @index = false
     @active_films = Film.where(active: true).order('average DESC').page params[:page]
   end
 
