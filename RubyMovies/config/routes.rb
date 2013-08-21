@@ -21,7 +21,7 @@ RubyMovies::Application.routes.draw do
     end
   end
   resources :films
-  get "users/list", as: "manageUser"
+  get "users/list", as: "manage_users"
   
   devise_for :users, :controllers => { :registrations => "registrations" }
   resources :users do 

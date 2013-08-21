@@ -23,7 +23,7 @@
             	end %> 
             <%= link_to_unless(disabled, "Nachrichten(#{new_message_count})", inbox_messages_path) %>
             <% if admin_signed_in? %>
-            	<%= link_to_unless_current('Administration', manageUser_url) %>
+            	<%= link_to_unless_current('Administration', manage_users_url) %>
             <% end %>
             <%= link_to_unless_current('Logout', destroy_user_session_path, :method => :delete) %>
 	<% else %>

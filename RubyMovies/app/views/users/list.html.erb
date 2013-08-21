@@ -1,83 +1,12 @@
 <h1>Benutzerverwaltung</h1>
 <h2>Benutzer</h2>
-<% if @users.empty? %>
-	<p>Keine Benutzer vorhanden.</p>
-<% else %>
-	<table>
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Email</th>
-				<th>Rolle ändern</th>
-				<th>Löschen</th>
-			</tr>
-		</thead>
 
-		<tbody>
-			<% @users.each do |user| %>
-			<tr>
-				<td><%= user.name %></td>
-				<td><%= user.email %></td>
-				<td><%= link_to "Ändern", promote_user_url(user.id) %></td>
-				<td><%= link_to "Löschen", user, method: :delete, data: { confirm: 'Sind Sie sicher?'} %></td>
-			</tr>
-			<% end %>
-		</tbody>
-	</table>
-<% end %>
+<%= render :partial => "list", :locals => { :users => @users, :error => "Keine Benutzer vorhanden."} %>
 
 <h2>Moderatoren</h2>
-<% if @moderators.empty? %>
-	<p>Keine Moderatoren vorhanden.</p>
-<% else %>
-	<table>
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Email</th>
-				<th>Rolle ändern</th>
-				<th>Löschen</th>
-			</tr>
-		</thead>
-
-		<tbody>
-			<% @moderators.each do |moderator| %>
-			<tr>
-				<td><%= moderator.name %></td>
-				<td><%= moderator.email %></td>
-				<td><%= link_to "Ändern", promote_user_url(moderator.id) %></td>
-				<td><%= link_to "Löschen", moderator, method: :delete, data: { confirm: 'Sind Sie sicher?'} %></td>
-			</tr>
-			<% end %>
-		</tbody>
-	</table>
-<% end %>
+<%= render :partial => "list", :locals => { :users => @moderators, :error => "Keine Moderatoren vorhanden."} %>
 
 <h2>Admins</h2>
-<% if @admins.empty? %>
-	<p>Keine Admins vorhanden.</p>
-<% else %>
-	<table>
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Email</th>
-				<th>Rolle ändern</th>
-				<th>Löschen</th>
-			</tr>
-		</thead>
-
-		<tbody>
-			<% @admins.each do |admin| %>
-			<tr>
-				<td><%= admin.name %></td>
-				<td><%= admin.email %></td>
-				<td><%= link_to "Ändern", promote_user_url(admin.id) %></td>
-				<td><%= link_to "Löschen", admin, method: :delete, data: { confirm: 'Sind Sie sicher?'} %></td>
-			</tr>
-			<% end %>
-		</tbody>
-	</table>
-<% end %>
+<%= render :partial => "list", :locals => { :users => @admins, :error => "Keine Admins vorhanden."} %>
 
 <%= back %>
