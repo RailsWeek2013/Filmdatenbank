@@ -8,7 +8,31 @@
     <% @films.each do |film| %>
       <tr>
         <td>
-          <%= film.title %>
+          <%= image_tag(film.picture) %>
+        </td>
+        <td>
+          <span style="font-size: 150%"><%= film.title %></span>
+          <br />
+          <br />
+          <% @film = film %>
+          <%= render 'tags' %>
+          <br />
+          <%= link_to 'Details', film %>
+          <br />
+          <br />
+            <% if admin_signed_in? || moderator_signed_in? %>
+              <%= link_to "In Filmliste aufnehmen", active_film_url(film.id), method: :post %>
+              <%= link_to 'Bearbeiten', edit_film_path(film) %>
+            <% end %>
+            <% if admin_signed_in? %>
+              <%= link_to 'Entfernen', film, method: :delete, data: { confirm: 'Sind Sie sicher?' } %>
+          <% end %>
+        </td>
+      </tr>
+
+      <!--<tr>
+        <td>
+          <span style="font-size: 150%"><%= film.title %></span>
         </td>
       </tr>
 
@@ -19,13 +43,12 @@
         <td>
           <%= link_to 'Details', film %>
 
-          <!-- TODO Folgende Links in Abhaengingkeit zur Rolle des Users -->
           <br />
           <%= link_to "In Filmliste aufnehmen", active_film_url(film.id), method: :post %>
           <%= link_to 'Bearbeiten', edit_film_path(film) %>
           <%= link_to 'Entfernen', film, method: :delete, data: { confirm: 'Sind Sie sicher?' } %>
         </td>
-      </tr>
+      </tr>-->
     <% end %>
   </tbody>
 </table>

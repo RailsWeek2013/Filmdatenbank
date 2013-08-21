@@ -7,7 +7,8 @@
           <%= image_tag(film.picture) %>
         </td>
         <td>
-          <strong><%= film.title %></strong>
+          <span style="font-size: 150%"><%= film.title %></span>
+          <br />
           <br />
           <% @film = film %>
           <%= render 'review' %>

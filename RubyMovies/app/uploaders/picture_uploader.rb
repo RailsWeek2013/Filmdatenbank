@@ -18,7 +18,7 @@ class PictureUploader < CarrierWave::Uploader::Base
   end
 
   def default_url
-    "http://placehold.it/90x120"
+    "http://placehold.it/120x160"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -30,7 +30,7 @@ class PictureUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
-  process :resize_to_fitr => [120, 120]
+  process :resize_to_fit => [120, 160]
   #
   # def scale(width, height)
   #   # do something
