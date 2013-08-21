@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<%= render 'manage' %> | 
+<%= render 'manage' %>  
 <%= back %>
 
 <p>
@@ -14,6 +14,22 @@
   <%= image_tag(@film.picture) %>
 </p>
 
+<p>
+  <strong>Schauspieler:</strong>
+  <%= @film.actor %>
+</p>
+<p>
+  <strong>Produzent:</strong>
+  <%= @film.producer %>
+</p>
+<p>
+  <strong>Regisseur:</strong>
+  <%= @film.director %>
+</p>
+<p>
+  <strong>Erscheinungsjahr:</strong>
+  <%= @film.year %>
+</p>
 <p>
   <strong>Beschreibung:</strong>
   <%= @film.description %>

@@ -10,7 +10,6 @@ RubyMovies::Application.routes.draw do
   
   delete "comments/destroy/:id", to: "comments#destroy", as: "comments_destroy"
 
-  post "films/createcomment/:id", to: "films#createcomment"
   get "films/top", to: "films#top", as: "films_top"
   post "films/:fid/review/:rid", to: "films#review", as: "film_review"
   get "/films/suggested", to: "films#suggested", as: "suggested_films"

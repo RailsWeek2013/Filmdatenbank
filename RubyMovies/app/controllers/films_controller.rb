@@ -117,19 +117,6 @@ class FilmsController < ApplicationController
     redirect_to edit_film_path(@film)
   end
 
-  def createcomment
-    @film = set_film
-    @comment = Comment.new(comment_params)
-    @comment.film = @film
-    @comment.user = current_user
-    if @comment.save
-      redirect_to film_url(@film),
-      notice: "Kommentar wurde gespeichert!"
-    else
-      render "new"
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_film
@@ -138,7 +125,7 @@ class FilmsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def film_params
-      params.require(:film).permit(:title, :tag_list, :picture, :description, :link, :active)
+      params.require(:film).permit(:title, :tag_list, :picture, :description, :link, :active, :producer, :actor, :director, :year)
     end
 
     #Berechnung der Durchschnittsbewertung für einen Film.
