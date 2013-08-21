@@ -28,9 +28,8 @@
     <%= link_to "Link zum Video", @film.link %>
   <% end %>
 </p>
-
-<p><%= render 'tags' %></p>
-<p><%= render 'review' %></p>
+<p><%= render :partial => "tags", :locals => { :film => @film} %></p>
+<p><%= render :partial => "review", :locals => { :film => @film} %></p>
 <p>Ihre Bewertung:
 <% if user_has_already_reviewed? @film %>
    <%= user_review(@film) %>

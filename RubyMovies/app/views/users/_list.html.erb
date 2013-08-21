@@ -1,0 +1,25 @@
+<% if users.empty? %>
+	<p><%= error %></p>
+<% else %>
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Rolle ändern</th>
+				<th>Löschen</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<% users.each do |user| %>
+			<tr>
+				<td><%= user.name %></td>
+				<td><%= user.email %></td>
+				<td><%= link_to "Ändern", promote_user_url(user.id) %></td>
+				<td><%= link_to "Löschen", user, method: :delete, data: { confirm: 'Sind Sie sicher?'} %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% end %>
