@@ -12,6 +12,11 @@ class Film < ActiveRecord::Base
 	#http://stackoverflow.com/questions/5331014/check-if-given-string-is-an-url
 	validates :link, :format => URI::regexp(%w(http https)), :allow_blank => true
 
+	#http://stackoverflow.com/questions/8481132/rails-3-make-text-field-accept-only-numeric-values
+	validates :year, :numericality => {:only_integer => true}, :allow_blank => true
+
+	validates :title, :presence => true
+
 	#make films taggable
 	acts_as_taggable
 end

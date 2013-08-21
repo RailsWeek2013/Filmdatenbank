@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130819201811) do
+ActiveRecord::Schema.define(version: 20130821114743) do
 
   create_table "comments", force: true do |t|
     t.string   "text"
@@ -37,6 +37,10 @@ ActiveRecord::Schema.define(version: 20130819201811) do
     t.datetime "updated_at"
     t.boolean  "active",      default: false
     t.float    "average"
+    t.string   "director"
+    t.string   "actor"
+    t.string   "producer"
+    t.integer  "year"
   end
 
   create_table "messages", force: true do |t|
