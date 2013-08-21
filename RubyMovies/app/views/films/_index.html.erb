@@ -1,27 +1,4 @@
 <div id="filme">
-<table>
-  <tbody>
-    <% @active_films.each do |film| %>
-      <tr>
-        <td>
-          <%= image_tag(film.picture) %>
-        </td>
-        <td>
-          <span style="font-size: 150%"><%= film.title %></span>
-          <br />
-          <br />
-          <% @film = film %>
-          <%= render 'review' %>
-          <br />
-          <%= render 'tags' %>
-          <br />
-          <%= link_to 'Details', film %>
-          <br />
-          <br />
-          <%= render 'manage' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+
+<%= render :partial => "filmtable", :locals => { :films => @active_films, :activefilms => true} %>
 </div>

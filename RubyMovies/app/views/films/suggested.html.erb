@@ -1,34 +1,8 @@
 <h2>Vorgeschlagene Filme</h2>
 
 <% if @films.empty? %>
-<p>Zur Zeit keine vorgeschlagenen Filme vorhanden.</p>
+  <p>Zur Zeit keine vorgeschlagenen Filme vorhanden.</p>
 <% else %>
-<table>
-  <tbody>
-    <% @films.each do |film| %>
-      <tr>
-        <td>
-          <%= image_tag(film.picture) %>
-        </td>
-        <td>
-          <span style="font-size: 150%"><%= film.title %></span>
-          <br />
-          <br />
-          <% @film = film %>
-          <%= render 'tags' %>
-          <br />
-          <%= link_to 'Details', film %>
-          <br />
-          <br />
-          <% if admin_signed_in? || moderator_signed_in? %>
-            <%= link_to "In Filmliste aufnehmen", active_film_url(film.id), method: :post %>
-            <br />
-          <% end %>
-          <%= render 'manage' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= paginate @films %>
+  <%= render :partial => "filmtable", :locals => { :films => @films, :activefilms => false} %>
+  <%= paginate @films %>
 <% end %>

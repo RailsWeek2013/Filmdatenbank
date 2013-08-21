@@ -1,7 +1,7 @@
 Durchschnittsbewertung:
-<%  if @film.average.nil?
+<%  if film.average.nil?
         d = "Keine Bewertung"
     else
-    	d = @film.average 
+    	d = film.average 
     end %>
 <%= d %>
