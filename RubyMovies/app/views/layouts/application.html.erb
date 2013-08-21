@@ -22,6 +22,7 @@
             		disabled = true
             	end %> 
             <%= link_to_unless(disabled, "Nachrichten(#{new_message_count})", inbox_messages_path) %>
+            <%= link_to "Suche nach Tags", tag_search_url %>
             <% if admin_signed_in? %>
             	<%= link_to_unless_current('Administration', manage_users_url) %>
             <% end %>

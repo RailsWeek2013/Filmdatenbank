@@ -6,6 +6,8 @@ RubyMovies::Application.routes.draw do
   delete "messages/:id", to: "messages#delete", as: "delete_message"
   resources :messages
   
+  get 'search', to: 'films#tagsearch', as: "tag_search"
+  get 'searchresult', to: 'films#searchresult', as: "search_result_films"
   get 'tags/:tag', to: 'films#index', as: :tag
   
   delete "comments/destroy/:id", to: "comments#destroy", as: "comments_destroy"

@@ -19,4 +19,8 @@ class Film < ActiveRecord::Base
 
 	#make films taggable
 	acts_as_taggable
+
+	def self.findbytags(tags)
+		where(active: true).tagged_with(tags, :any => true)
+	end
 end

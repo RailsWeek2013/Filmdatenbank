@@ -1,0 +1,24 @@
+<%= form_tag('search', method: :get) do %>
+	<% Film.where(active: true).tag_counts.each do |tag| %>
+		<%= tag.name %>: 
+	<!-- http://apidock.com/rails/ActionView/Helpers/FormTagHelper/check_box_tag -->
+		<% unless params[:tag_names].nil? %>
+			<% if params[:tag_names].include? tag.name %>
+				<%= check_box_tag 'tag_names[]', tag.name, true %>
+			<% else %>
+				<%= check_box_tag 'tag_names[]', tag.name %>
+			<% end %>
+		<% else %>
+				<%= check_box_tag 'tag_names[]', tag.name %>
+		<% end %>
+	<% end %>
+	<%= submit_tag "Suche" %>
+<% end %>
+<% unless @films.nil? %>
+	<%= render :partial => "filmtable", :locals => { :films => @films, :activefilms => true} %>
+<% else %>
+<%= @films %>
+empty
+<%= @test %>
+<% end %>	
+

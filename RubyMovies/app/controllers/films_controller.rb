@@ -117,6 +117,10 @@ class FilmsController < ApplicationController
     redirect_to edit_film_path(@film)
   end
 
+  def tagsearch
+    @films = Film.findbytags params[:tag_names]
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_film
