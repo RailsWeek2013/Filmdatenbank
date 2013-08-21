@@ -43,7 +43,9 @@
     <% end %>
 <% end %>
 </p>
-<%= render 'comment' %>
+<% if user_signed_in? %>
+   <%= render 'comment' %>
+<% end %>
 <%= link_to 'Kommentar hinzufügen', new_film_comment_path(@film) %>
 <h3>Kommentare:</h3>
 <% if @comments.empty? %>
@@ -51,11 +53,12 @@
 <% end %>
 <br/>
 <% @comments.each do |comment| %>
-	Von: <%= comment.user.name %>
+	<p>Von: <%= comment.user.name %>
   <br />
   Datum: <%= comment.created_at.to_formatted_s(:db) %>
 	<p><%= comment.text %></p>
   <% if admin_signed_in? || moderator_signed_in? %>
     <%= link_to 'Kommentar löschen', comments_destroy_path(comment), method: :delete %>
-  <% end %>
+    <br />
+  <% end %></p>
 <% end %>
