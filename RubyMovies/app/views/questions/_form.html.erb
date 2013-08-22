@@ -1,0 +1,47 @@
+<%= form_for(@question) do |f| %>
+  <% if @question.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
+
+      <ul>
+      <% @question.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title, "Frage" %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :answer1, "1. Antwortmöglichkeit" %><br>
+    <%= f.text_field :answer1 %>
+  </div>
+  <div class="field">
+    <%= f.label :answer2, "2. Antwortmöglichkeit" %><br>
+    <%= f.text_field :answer2 %>
+  </div>
+  <div class="field">
+    <%= f.label :answer3, "3. Antwortmöglichkeit" %><br>
+    <%= f.text_field :answer3 %>
+  </div>
+  <div class="field">
+    <%= f.label :answer4, "4. Antwortmöglichkeit" %><br>
+    <%= f.text_field :answer4 %>
+  </div>
+  <div class="field">
+    <%= f.label :solution, "Korrekte Antwortmöglichkeit (1-4)" %><br>
+    <%= f.number_field :solution %>
+  </div>
+  <% if admin_moderator_signed_in? %>
+    <div class="field">
+      <%= f.label :active %><br>
+      <%= f.check_box :active %>
+    </div>
+  <% end %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

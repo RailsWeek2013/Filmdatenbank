@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Frage:</strong>
+  <%= @question.title %>
+</p>
+
+<p>
+  <strong>Antwort 1:</strong>
+  <%= @question.answer1 %>
+</p>
+
+<p>
+  <strong>Antwort 2:</strong>
+  <%= @question.answer2 %>
+</p>
+
+<p>
+  <strong>Antwort 3:</strong>
+  <%= @question.answer3 %>
+</p>
+
+<p>
+  <strong>Antwort 4:</strong>
+  <%= @question.answer4 %>
+</p>
+
+<p>
+  <strong>Lösung:</strong>
+  <%= @question.solution %>
+</p>
+
+<p>
+  <strong>Freigeschaltet:</strong>
+  <%= active @question %>
+</p>
+
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Back', root_path %>

@@ -1,0 +1,32 @@
+<%= form_tag({controller: "questions", action: "solve"}, {method: :get}) do %>
+	<% @quiz.each do |question| %>
+		<p><%= @solution %></p>
+		<p>
+			<%= question.title %>
+			<br />
+			<p>
+				<%= radio_button_tag("answer", "1", checked?("1")) %>
+				<%= label_tag(:answer_answer1, question.answer1) %>
+			</p>
+			<p>
+				<%= radio_button_tag("answer", "2", checked?("2")) %>
+				<%= label_tag(:answer_answer2, question.answer2) %>
+			</p>
+			<p>
+				<%= radio_button_tag("answer", "3", checked?("3")) %>
+				<%= label_tag(:answer_answer3, question.answer3) %>
+			</p>
+			<p>
+				<%= radio_button_tag("answer", "4", checked?("4")) %>
+				<%= label_tag(:answer_answer4, question.answer4) %>
+			</p>
+			<br />
+			<%= submit_tag "Antworten" %>
+		</p>
+		<%= hidden_field_tag 'quiz', @q.id %>
+		<%= hidden_field_tag 'id', question.id %>
+		<%= hidden_field_tag 'page', params[:page] %>
+
+		<%= paginate @quiz, :params => {:answer => "0"} %>
+	<% end %>
+<% end %>

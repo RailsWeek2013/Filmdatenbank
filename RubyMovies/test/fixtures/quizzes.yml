@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  q1_id: 1
+  q2_id: 1
+  q3_id: 1
+  q4_id: 1
+  q5_id: 1
+
+two:
+  q1_id: 1
+  q2_id: 1
+  q3_id: 1
+  q4_id: 1
+  q5_id: 1

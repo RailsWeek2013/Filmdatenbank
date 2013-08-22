@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130821114743) do
+ActiveRecord::Schema.define(version: 20130822084320) do
 
   create_table "comments", force: true do |t|
     t.string   "text"
@@ -57,6 +57,28 @@ ActiveRecord::Schema.define(version: 20130821114743) do
 
   create_table "participants", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "questions", force: true do |t|
+    t.string   "title"
+    t.string   "answer1"
+    t.string   "answer2"
+    t.string   "answer3"
+    t.string   "answer4"
+    t.integer  "solution"
+    t.boolean  "active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "quizzes", force: true do |t|
+    t.integer  "q1_id"
+    t.integer  "q2_id"
+    t.integer  "q3_id"
+    t.integer  "q4_id"
+    t.integer  "q5_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

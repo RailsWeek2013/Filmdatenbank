@@ -1,0 +1,37 @@
+<h1>Alle Fragen</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Frage</th>
+      <th>Antwort 1</th>
+      <th>Antwort 2</th>
+      <th>Antwort 3</th>
+      <th>Antwort 4</th>
+      <th>Lösung</th>
+      <th>Freigeschaltet</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= question.title %></td>
+        <td><%= question.answer1 %></td>
+        <td><%= question.answer2 %></td>
+        <td><%= question.answer3 %></td>
+        <td><%= question.answer4 %></td>
+        <td><%= question.solution %></td>
+        <td><%= active question %></td>
+        <td><%= link_to 'Details', question %></td>
+        <td><%= link_to 'Bearbeiten', edit_question_path(question) %></td>
+        <td><%= link_to 'Löschen', question, method: :delete, data: { confirm: 'Sind Sie sicher?' } %></td>
+        <td><%= link_to 'Freischalten', active_question_path(question.id), method: :post unless question.active %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,5 +1,15 @@
 RubyMovies::Application.routes.draw do
 
+  get "quizzes/new"
+  get "quizzes/create"
+  get "/questions/solve", to: "questions#solve"
+  get "questions/quiz", to: "questions#quiz", as: "quiz_start"
+  resources :questions do
+    member do 
+      post "active"
+    end
+  end
+
   get "messages/new/:mid", to: "messages#new", as: "message_respond"
   get "messages/outbox", to: "messages#outbox", as: "outbox_messages"
   get "messages/inbox", to: "messages#index", as: "inbox_messages"

@@ -17,6 +17,15 @@ module UsersHelper
 		false
 	end
 
+	def admin_moderator_signed_in?
+		if user_signed_in?
+			if current_user.moderator? || current_user.admin?
+				return true
+			end
+		end
+		false
+	end
+
 	def user_has_already_reviewed? film
 		if user_signed_in?
 			r = Review.where(film: film, user: current_user)
