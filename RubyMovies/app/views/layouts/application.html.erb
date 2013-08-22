@@ -7,38 +7,34 @@
 	<%= csrf_meta_tags %>
 </head>
 <body>
-	<h1>RubyMovies</h1>
-	<%= link_to_unless_current "Alle Filme", root_path %>
-	<%= link_to_unless_current "Top-Filme", films_top_path %>
-    <%= link_to_unless_current "Filmquiz", quiz_start_path %>
-    <%= link_to_unless_current "Suche nach Tags", tag_search_url %>
-	<% if user_signed_in? %>
-            <% if current_user.admin? || current_user.moderator? %>
-                <%= link_to_unless_current "Fragen verwalten", questions_url %>
-            	<%= link_to_unless_current "Vorgeschlagene Filme", suggested_films_url %>
-            	
-                <% s = "Film hinzufügen" 
-             else 
-            	 s = "Film vorschlagen" 
-             end %>
-            <%= link_to_unless_current "Frage vorschlagen", new_question_url %>
-            <%= link_to_unless_current s, new_film_path %>
-            <% 	if current_page?(controller: 'messages', action: 'outbox') || current_page?(controller: 'messages', action: 'new') || current_page?(controller: 'messages', action: 'index')
-            		disabled = true
-            	end %> 
-            <%= link_to_unless(disabled, "Nachrichten(#{new_message_count})", inbox_messages_path) %>
-            <% if admin_signed_in? %>
-            	<%= link_to_unless_current('Administration', manage_users_url) %>
-            <% end %>
-            <%= link_to_unless_current('Logout', destroy_user_session_path, :method => :delete) %>
-	<% else %>
-		<%= link_to_unless_current('Registrierung', new_user_registration_url)  %>	
-		<%= link_to('Login', new_user_session_url)  %>	
-	<% end %>
-	<p class="notice"><%= notice %></p>
-	<p class="alert"><%= alert %></p>
+    <div id = "mainwrapper"> 
+    	<h1>RubyMovies</h1>
+        <div id = "links">
+            <div><%= link_to_unless_current "Alle Filme", root_path %></div>
+            <div><%= link_to_unless_current "Top-Filme", films_top_path %></div>
+            <div><%= link_to_unless_current "Suche nach Tags", tag_search_url %></div>
+            <div><%= link_to_signed_in "Film vorschlagen", new_film_path %></div>
+            <div><%= link_to_admin_mod "Vorgeschlagene Filme", suggested_films_url %></div>
 
-	<%= yield %>
+            <br />
 
+            <div><%= link_to_unless_current "Filmquiz", quiz_start_path %></div>
+            <div><%= link_to_signed_in "Frage vorschlagen", new_question_url %></div>
+            <div><%= link_to_admin_mod "Fragen verwalten", questions_url %></div>
+
+            <br />
+
+            <div><%= link_to_unless(messagelinkdisabled?, "Nachrichten(#{new_message_count})", inbox_messages_path) if user_signed_in? %></div>
+            <div><%= link_to_unless_current('Administration', manage_users_url) if admin_signed_in? %></div>
+            <div><%= link_to_unless_current('Logout', destroy_user_session_path, :method => :delete) if user_signed_in? %></div>
+            <div><%= link_to_unless_current('Registrierung', new_user_registration_url) unless user_signed_in? %></div>
+            <div><%= link_to('Login', new_user_session_url) unless user_signed_in? %></div>  
+        </div>
+        <div id = "content">
+            <p id="notice"><%= notice %></p>
+            <p id="alert"><%= alert %></p>
+            <%= yield %>
+        </div>
+    </div>
 </body>
 </html>
