@@ -14,6 +14,7 @@
     <%= link_to_unless_current "Suche nach Tags", tag_search_url %>
 	<% if user_signed_in? %>
             <% if current_user.admin? || current_user.moderator? %>
+                <%= link_to_unless_current "Fragen verwalten", questions_url %>
             	<%= link_to_unless_current "Vorgeschlagene Filme", suggested_films_url %>
             	
                 <% s = "Film hinzufügen" 
