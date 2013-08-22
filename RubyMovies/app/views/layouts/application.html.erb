@@ -15,11 +15,12 @@
 	<% if user_signed_in? %>
             <% if current_user.admin? || current_user.moderator? %>
             	<%= link_to_unless_current "Vorgeschlagene Filme", suggested_films_url %>
-            	<%= link_to_unless_current "Frage vorschlagen", new_question_url %>
+            	
                 <% s = "Film hinzufügen" 
              else 
             	 s = "Film vorschlagen" 
              end %>
+            <%= link_to_unless_current "Frage vorschlagen", new_question_url %>
             <%= link_to_unless_current s, new_film_path %>
             <% 	if current_page?(controller: 'messages', action: 'outbox') || current_page?(controller: 'messages', action: 'new') || current_page?(controller: 'messages', action: 'index')
             		disabled = true

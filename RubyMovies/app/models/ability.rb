@@ -12,21 +12,34 @@ class Ability
         if user.moderator?
             can :manage, Film
             can :manage, Message
+            can :manage, Question
+            can :manage, Comment
         else
             if user.user?
                 can :create, Film
                 can :read, Film
                 can :review, Film
+                can :top, Film
+                can :tagsearch, Film
+                can :read, Question
+                can :quiz, Question
+                can :solve, Question
+                can :create, Question
                 can :create, Comment
                 can :read, Comment
                 can :create, Message
                 can :read, Message
                 can :delete, Message
                 can :update, Message
+                can :outbox, Message
             else
                 can :read, Film
                 can :top, Film
+                can :tagsearch, Film
                 can :read, Comment
+                can :read, Question
+                can :quiz, Question
+                can :solve, Question
             end
         end
     end
