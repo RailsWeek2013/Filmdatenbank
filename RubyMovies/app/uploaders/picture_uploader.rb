@@ -18,7 +18,7 @@ class PictureUploader < CarrierWave::Uploader::Base
   end
 
   def default_url
-    "http://placehold.it/120x160"
+    "default_film_picture.png"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
