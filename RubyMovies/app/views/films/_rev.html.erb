@@ -1,0 +1,5 @@
+<% i = 0 %>
+<% 5.times do %>
+	<% i += 1 %>
+    <%= link_to i, film_review_path(@film, i), method: :post %>
+<% end %>
