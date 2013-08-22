@@ -1,11 +1,14 @@
+<div id="cloud">
+    <h2>Filme nach Kategorien</h2>
+	<%= render 'cloud' %>
+</div>
+
 <% if params[:tag] %>
 	<h2>Alle Filme mit Tag: <%= params[:tag] %></h2>
 <% else %>
 	<h2>Alle Filme</h2>
 <% end %>
+
 <%= render 'index' %>
+
 <%= paginate @active_films %>
-<div id="cloud">
-  <h3>Filme nach Kategorien</h3>
-  <%= render 'cloud' %>
-</div>

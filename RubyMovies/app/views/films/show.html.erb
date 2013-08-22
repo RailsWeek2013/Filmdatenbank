@@ -1,7 +1,5 @@
-<p id="notice"><%= notice %></p>
-
 <%= render 'manage' %>  
-<%= back %>
+<%= link_to 'Zurück', films_path %>
 
 <p>
   <strong>Title:</strong>
@@ -44,35 +42,38 @@
     <%= link_to "Link", @film.link %>
   <% end %>
 </p>
+
 <p><%= render :partial => "tags", :locals => { :film => @film} %></p>
+
 <p><%= render :partial => "review", :locals => { :film => @film} %></p>
-<p>Ihre Bewertung:
-<% if user_has_already_reviewed? @film %>
-   <%= user_review(@film) %>
-<% else %>
-  <% i = 0 
-    5.times do %>
-      <% i += 1 %>
-     <%= link_to i, film_review_path(@film, i), method: :post %>
-    <% end %>
-<% end %>
+
+<p>
+  <strong>Ihre Bewertung:</strong>
+  <% if user_has_already_reviewed? @film %>
+    <%= user_review(@film) %>
+  <% else %>
+    <%= render 'rev' %>
+  <% end %>
 </p>
-<% if user_signed_in? %>
-   <%= render 'comment' %>
-<% end %>
+
+<%= render 'comment' if user_signed_in? %>
+
 <h3>Kommentare:</h3>
 <% if @comments.empty? %>
 	<p>Keine Kommentare vorhanden!</p>
 <% end %>
-<br/>
+
 <% @comments.each do |comment| %>
-	<p>Von: <%= comment.user.name %>
-  <br />
-  Datum: <%= comment.created_at.to_formatted_s(:db) %>
-	<p><%= comment.text %></p>
-  <% if admin_signed_in? || moderator_signed_in? %>
-    <%= link_to 'Kommentar löschen', comments_destroy_path(comment), method: :delete %>
+  <p>
+    <strong>Von: </strong><%= comment.user.name %>
     <br />
-  <% end %></p>
+    <strong>Datum: </strong><%= comment.created_at.to_formatted_s(:db) %>
+    <p><%= comment.text %></p>
+    <% if admin_signed_in? || moderator_signed_in? %>
+      <%= link_to 'Kommentar löschen', comments_destroy_path(comment), method: :delete %>
+      <br />
+    <% end %>
+  </p>
 <% end %>
+
 <%= paginate @comments %>

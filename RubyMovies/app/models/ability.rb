@@ -21,7 +21,6 @@ class Ability
                 can :review, Film
                 can :top, Film
                 can :tagsearch, Film
-                can :read, Question
                 can :quiz, Question
                 can :solve, Question
                 can :create, Question
@@ -37,7 +36,6 @@ class Ability
                 can :top, Film
                 can :tagsearch, Film
                 can :read, Comment
-                can :read, Question
                 can :quiz, Question
                 can :solve, Question
             end
