@@ -1,5 +1,6 @@
 <%= form_tag({controller: "questions", action: "solve"}, {method: :get}) do %>
 	<% @quiz.each do |question| %>
+		<% next if question.nil? %>
 		<p><%= @solution %></p>
 		<p>
 			<%= question.title %>
