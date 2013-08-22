@@ -108,11 +108,11 @@ class QuestionsController < ApplicationController
 
     def getquiz quiz
       @quiz = Array.new
-      @quiz.push quiz.q1
-      @quiz.push quiz.q2
-      @quiz.push quiz.q3
-      @quiz.push quiz.q4
-      @quiz.push quiz.q5
+      @quiz.push quiz.q1 unless quiz.q1.nil?
+      @quiz.push quiz.q2 unless quiz.q2.nil?
+      @quiz.push quiz.q3 unless quiz.q3.nil?
+      @quiz.push quiz.q4 unless quiz.q4.nil?
+      @quiz.push quiz.q5 unless quiz.q5.nil?
       @quiz = Kaminari.paginate_array(@quiz).page(params[:page]).per(1)
     end
   end

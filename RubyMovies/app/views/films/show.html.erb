@@ -41,7 +41,7 @@
     <br />
     <%= render 'video' %>
   <% else %>
-    <%= link_to "Link zum Video", @film.link %>
+    <%= link_to "Link", @film.link %>
   <% end %>
 </p>
 <p><%= render :partial => "tags", :locals => { :film => @film} %></p>

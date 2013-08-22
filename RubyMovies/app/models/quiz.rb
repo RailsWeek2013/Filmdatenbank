@@ -9,7 +9,7 @@ class Quiz < ActiveRecord::Base
 	def self.quiz
 		quiz = Quiz.new
 		questions = Question.get_n_questions(5)
-		quiz.q1 = questions[0]
+		quiz.q1 = questions[0] 
 		quiz.q2 = questions[1]
 		quiz.q3 = questions[2]
 		quiz.q4 = questions[3]
