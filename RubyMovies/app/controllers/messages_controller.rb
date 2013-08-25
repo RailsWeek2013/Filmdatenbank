@@ -48,14 +48,18 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(message_params)
     @message.sender = current_user
-    respond_to do |format|
-      if @message.save
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @message }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @message.errors, status: :unprocessable_entity }
+    if current_user.is_allowed_to_send? params[:message][:recipient_id]
+      respond_to do |format|
+        if @message.save
+          format.html { redirect_to @message, notice: 'Message was successfully created.' }
+          format.json { render action: 'show', status: :created, location: @message }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @message.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to new_message_path, notice: 'Sie dürfen an diesen Benutzer keine Nachricht verschicken!'
     end
   end
 
@@ -109,6 +113,15 @@ class MessagesController < ApplicationController
     end
   end
 
+  def block
+    if current_user.add_to_blocklist params[:user] 
+      notice = "Benutzer ist nun blockiert!"
+    else
+      notice = "Der Benutzer ist bereits blockiert!"
+    end
+    redirect_to inbox_messages_path, notice: notice
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_message
@@ -119,4 +132,4 @@ class MessagesController < ApplicationController
     def message_params
       params.require(:message).permit(:sender_id, :recipient_id, :subject, :text, :read, :deleted_by_sender, :deleted_by_recipient)
     end
-end
+  end

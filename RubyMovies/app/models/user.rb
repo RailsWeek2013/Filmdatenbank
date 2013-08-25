@@ -3,12 +3,12 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  :recoverable, :rememberable, :trackable, :validatable
 
 
-	has_many :comments
-	has_many :reviews
-	has_many :films, through: :reviews
+  has_many :comments
+  has_many :reviews
+  has_many :films, through: :reviews
 
 	# Informationen zur Handhabung mehrmaliger Assoziation mit der selben Tabelle aus:
 	# http://www.spacevatican.org/2008/5/6/creating-multiple-associations-with-the-same-table/
@@ -30,5 +30,20 @@ class User < ActiveRecord::Base
 
 	def user?
 		self.role.name == "User"
+	end
+
+	def add_to_blocklist user_id
+		b = Blocklist.new
+		b.user_id = self.id
+		b.blocked_id = user_id
+		b.save
+	end
+
+	def is_allowed_to_send? recipient_id
+		if Blocklist.where(user_id: recipient_id, blocked_id: self.id).empty?
+			return true
+		else
+			false
+		end
 	end
 end
