@@ -1,0 +1,25 @@
+<%= render 'messages/link' %>
+<h2>Alle blockierten Benutzer</h2>
+
+<% if @users.empty? %>
+  <p>Keine blockierten Benutzer vorhanden</p>
+<% else %>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Blockierte Benutzer</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= link_to "Blockierung aufheben", delete_blocklist_path(user.id), method: :delete %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
