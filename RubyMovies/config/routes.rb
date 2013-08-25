@@ -1,5 +1,8 @@
 RubyMovies::Application.routes.draw do
 
+  get "/blocklists", to: "blocklists#index", as: "blocklist"
+  delete "/blocklists/:blocked_user", to: "blocklists#destroy", as: "delete_blocklist"
+  
   get "quizzes/new"
   get "quizzes/create"
   get "/questions/solve", to: "questions#solve"

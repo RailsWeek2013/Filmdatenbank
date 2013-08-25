@@ -27,7 +27,7 @@
           <td><%= message.subject %></td>
           <td><%= link_to 'lesen', message %></td>
           <td><%= link_to 'löschen', delete_message_path(message.id), method: :delete %></td>
-          <td><%= link_to 'blockieren', block_user_path(message.sender), method: :put %></td>
+          <td><%= link_to 'blockieren', block_user_path(message.sender), method: :put, data: { confirm: 'Sind Sie sicher?'}  if sender %></td>
         </tr>
       <% end %>
     </tbody>
