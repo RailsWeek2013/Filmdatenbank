@@ -1,33 +1,26 @@
 class UsersController < ApplicationController
   authorize_resource
 
+  before_action :set_user, only: [:promote, :update, :destroy]
+
   def promote
-  	@user = User.find(params[:id])
   end
 
   def list
-  	ur = Role.find_by name: "User"
-  	mr = Role.find_by name: "Moderator"
-  	ar = Role.find_by name: "Admin"
-
-  	@users = User.where("role_id = ?", ur.id)
-    @moderators = User.where("role_id = ?", mr.id)
-    @admins = User.where("role_id = ?", ar.id)
+  	@users = User.get_users
+    @moderators = User.get_moderators
+    @admins = User.get_admins
   end
 
   def update
-    @user = User.all.find(params[:id])
     if @user.update_attributes(user_params)
-      redirect_to :back,
-      notice: "Der Benutzer wurde erfolgreich geändert."
+      redirect_to :back, notice: "Der Benutzer wurde erfolgreich geändert."
     else
-      redirect_to :back,
-      notice: "Es ist ein Problem beim Speichern des Benutzers aufgetreten."
+      redirect_to :back, notice: "Es ist ein Problem beim Speichern des Benutzers aufgetreten."
     end
   end
 
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
     respond_to do |format|
       format.html { redirect_to manageUser_url }

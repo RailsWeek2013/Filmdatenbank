@@ -46,4 +46,19 @@ class User < ActiveRecord::Base
 			false
 		end
 	end
+
+	def self.get_users
+		ur = Role.find_by name: "User"
+		User.where("role_id = ?", ur.id).order(name: :asc)
+	end
+
+	def self.get_moderators
+		mr = Role.find_by name: "Moderator"
+		User.where("role_id = ?", mr.id).order(name: :asc)
+	end
+
+	def self.get_admins
+		ar = Role.find_by name: "Admin"
+		User.where("role_id = ?", ar.id).order(name: :asc)
+	end
 end
