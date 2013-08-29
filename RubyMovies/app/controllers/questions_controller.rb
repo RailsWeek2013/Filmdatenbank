@@ -53,38 +53,6 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def active
-    q = Question.find(params[:id])
-    q.active = true
-    q.save
-    redirect_to questions_url
-  end
-
-  def quiz
-    quiz = Quiz.quiz
-    quiz.save
-    @q = quiz
-    @quiz = getquiz quiz
-  end
-
-  def solve
-    @quiz = Quiz.find(params[:quiz].to_i)
-    @q = @quiz
-    @quiz = getquiz @quiz
-    unless params[:answer].nil?
-      if params[:answer] == Question.find(params[:id]).solution.to_s
-        @solution = "Die Antwort ist richtig"
-      else
-        if params[:answer] == "0"
-          @solution = ""
-        else
-          @solution = "Die Antwort ist falsch"
-        end
-      end
-    end
-    render action: "quiz"
-  end
-
   # DELETE /questions/1
   # DELETE /questions/1.json
   def destroy
@@ -93,6 +61,28 @@ class QuestionsController < ApplicationController
       format.html { redirect_to questions_url }
       format.json { head :no_content }
     end
+  end
+
+  def active
+    q = Question.find(params[:id]).set_active
+    redirect_to questions_url
+  end
+
+  def quiz
+    quiz = Quiz.get_quiz current_user
+    @quiz = Kaminari.paginate_array(quiz.to_a).page(params[:page]).per(1)
+  end
+
+  def solve
+    quiz = Quiz.where(user: current_user).take
+    @quiz = Kaminari.paginate_array(quiz.to_a).page(params[:page]).per(1)
+    @solution = Question.find(params[:id]).correct params[:answer]
+    render action: "quiz"
+  end
+
+  def new_quiz
+    Quiz.new_quiz current_user
+    redirect_to quiz_start_path, notice: "Neues Quiz erstellt."
   end
 
   private
@@ -104,15 +94,5 @@ class QuestionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
       params.require(:question).permit(:title, :answer1, :answer2, :answer3, :answer4, :solution, :active)
-    end
-
-    def getquiz quiz
-      @quiz = Array.new
-      @quiz.push quiz.q1 unless quiz.q1.nil?
-      @quiz.push quiz.q2 unless quiz.q2.nil?
-      @quiz.push quiz.q3 unless quiz.q3.nil?
-      @quiz.push quiz.q4 unless quiz.q4.nil?
-      @quiz.push quiz.q5 unless quiz.q5.nil?
-      @quiz = Kaminari.paginate_array(@quiz).page(params[:page]).per(1)
     end
   end

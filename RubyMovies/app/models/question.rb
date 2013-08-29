@@ -4,15 +4,10 @@ class Question < ActiveRecord::Base
 
 	#http://edgeguides.rubyonrails.org/active_record_validations.html
 	validates :solution, :numericality => {only_integer: true, less_than: 5, greater_than: 0}, :allow_blank => false
-
 	validates :title, :presence => true
-
 	validates :answer1, :presence => true
-
 	validates :answer2, :presence => true
-
 	validates :answer3, :presence => true
-
 	validates :answer4, :presence => true
 
 	paginates_per 1
@@ -22,4 +17,22 @@ class Question < ActiveRecord::Base
 		Question.where(active: true).order("RANDOM()").limit(n)
 	end
 
+	def correct solution
+		unless solution.nil?
+			if solution == self.solution.to_s
+				"Die Antwort ist richtig"
+			else
+				if solution == "0"
+					""
+				else
+					"Die Antwort ist falsch"
+				end
+			end
+		end
+	end
+
+	def set_active
+		self.active = true
+		self.save
+	end
 end

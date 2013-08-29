@@ -24,10 +24,10 @@
 			<br />
 			<%= submit_tag "Antworten" %>
 		</p>
-		<%= hidden_field_tag 'quiz', @q.id %>
 		<%= hidden_field_tag 'id', question.id %>
 		<%= hidden_field_tag 'page', params[:page] %>
 
-		<%= paginate @quiz, :params => {:answer => "0"} %>
 	<% end %>
+	<%= paginate @quiz, :params => {:answer => "0"} %>
+
 <% end %>
