@@ -23,8 +23,7 @@ class MessagesController < ApplicationController
     message = Message.where("id = ? AND (sender_id = ? OR recipient_id = ?)",params[:id], current_user.id, current_user.id ).take
 
     if (message.recipient == current_user) && !message.read
-      message.read = true
-      message.save
+      message.set_read
     end
   end
 
@@ -51,7 +50,7 @@ class MessagesController < ApplicationController
     if current_user.is_allowed_to_send? params[:message][:recipient_id]
       respond_to do |format|
         if @message.save
-          format.html { redirect_to @message, notice: 'Message was successfully created.' }
+          format.html { redirect_to @message, notice: 'Nachricht erfolreich verschickt.' }
           format.json { render action: 'show', status: :created, location: @message }
         else
           format.html { render action: 'new' }
@@ -77,37 +76,21 @@ class MessagesController < ApplicationController
     end
   end
 
-  # DELETE /messages/1
-  # DELETE /messages/1.json
-  def delete
-    if @message.sender == current_user
-      if @message.deleted_by_recipient
-        destroy
-      else
-        @message.deleted_by_sender = true
-        @message.save
-
-        redirect_to outbox_messages_path
-      end
-    end
-
-    if @message.recipient == current_user
-      if @message.deleted_by_sender
-        destroy
-      else
-        @message.deleted_by_recipient = true
-        @message.save
-        
-        redirect_to inbox_messages_path
-      end
-    end
-  end
-
   def destroy
     @message.destroy
     respond_to do |format|
       format.html { redirect_to messages_url }
       format.json { head :no_content }
+    end
+  end
+
+  # DELETE /messages/1
+  # DELETE /messages/1.json
+  def delete
+    if @message.delete current_user
+      redirect_to outbox_messages_path
+    else
+      redirect_to inbox_messages_path
     end
   end
 
