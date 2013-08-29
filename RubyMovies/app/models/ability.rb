@@ -13,6 +13,7 @@ class Ability
             can :manage, Film
             can :manage, Message
             can :manage, Question
+            can :manage, Quiz
             can :manage, Comment
         else
             if user.user?
@@ -24,6 +25,7 @@ class Ability
                 can :quiz, Question
                 can :solve, Question
                 can :create, Question
+                can :new_quiz, Question
                 can :create, Comment
                 can :read, Comment
                 can :create, Message
@@ -36,8 +38,6 @@ class Ability
                 can :top, Film
                 can :tagsearch, Film
                 can :read, Comment
-                can :quiz, Question
-                can :solve, Question
             end
         end
     end
