@@ -15,6 +15,8 @@ class Ability
             can :manage, Question
             can :manage, Quiz
             can :manage, Comment
+            can :read, Blocklist
+            can :destroy, Blocklist
         else
             if user.user?
                 can :create, Film
@@ -33,6 +35,8 @@ class Ability
                 can :delete, Message
                 can :update, Message
                 can :outbox, Message
+                can :read, Blocklist
+                can :destroy, Blocklist
             else
                 can :read, Film
                 can :top, Film
