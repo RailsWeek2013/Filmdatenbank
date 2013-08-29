@@ -18,7 +18,7 @@
 
             <br />
 
-            <div><%= link_to_unless_current "Filmquiz", quiz_start_path %></div>
+            <div><%= link_to_unless(filmquizlinkdisabled?, "Filmquiz", quiz_start_path) if user_signed_in? %></div>
             <div><%= link_to_signed_in "Frage vorschlagen", new_question_url %></div>
             <div><%= link_to_admin_mod "Fragen verwalten", questions_url %></div>
 

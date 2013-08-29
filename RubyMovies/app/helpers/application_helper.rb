@@ -16,12 +16,20 @@ module ApplicationHelper
 		end
 	end
 
+	def filmquizlinkdisabled?
+		if current_page?(controller: 'questions', action: 'solve') ||
+			current_page?(controller: 'questions', action: 'quiz')
+			return true
+		end
+		false
+	end
+
 	def messagelinkdisabled?
 		if current_page?(controller: 'messages', action: 'outbox') || 
 			current_page?(controller: 'messages', action: 'new') || 
 			current_page?(controller: 'messages', action: 'index')
-                    return true
-        end
-        false
+			return true
+		end
+		false
 	end
 end
