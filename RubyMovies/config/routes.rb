@@ -7,6 +7,7 @@ RubyMovies::Application.routes.draw do
   get "quizzes/create"
   get "/questions/solve", to: "questions#solve"
   get "questions/quiz", to: "questions#quiz", as: "quiz_start"
+  get "questions/quiz/new", to: "questions#new_quiz", as: "quiz_new"
   resources :questions do
     member do 
       post "active"
