@@ -1,7 +1,7 @@
 class MessagesController < ApplicationController
   authorize_resource
 
-  before_action :set_message, only: [:show, :edit, :update, :destroy]
+  before_action :set_message, only: [:show, :edit, :update, :destroy, :delete]
 
   # GET /messages
   # GET /messages.json
@@ -80,8 +80,6 @@ class MessagesController < ApplicationController
   # DELETE /messages/1
   # DELETE /messages/1.json
   def delete
-    set_message
-
     if @message.sender == current_user
       if @message.deleted_by_recipient
         destroy
