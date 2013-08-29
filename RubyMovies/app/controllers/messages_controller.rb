@@ -21,7 +21,6 @@ class MessagesController < ApplicationController
   def show
     #message = Message.find(params[:id])
     message = Message.where("id = ? AND (sender_id = ? OR recipient_id = ?)",params[:id], current_user.id, current_user.id ).take
-
     if (message.recipient == current_user) && !message.read
       message.set_read
     end
