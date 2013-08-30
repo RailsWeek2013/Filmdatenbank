@@ -23,4 +23,17 @@ class Film < ActiveRecord::Base
 	def self.findbytags(tags)
 		where(active: true).tagged_with(tags, :any => true)
 	end
+
+	def review note, user
+		r = Review.new
+		r.note = note
+    	r.film = self
+    	r.user = user
+    	r.save
+	end
+
+	def set_active
+		self.active = true
+    	self.save
+	end
 end

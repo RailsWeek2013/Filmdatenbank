@@ -10,7 +10,7 @@ class FilmsController < ApplicationController
     if params[:tag]
       @active_films = Film.where(active: true).tagged_with(params[:tag]).page params[:page]
     else
-     @active_films = Film.where(active: true).page params[:page]
+      @active_films = Film.where(active: true).page params[:page]
    end
  end
 
@@ -82,16 +82,12 @@ class FilmsController < ApplicationController
   end
 
   def review
-    r = Review.new
-    r.note = params[:rid]
-    r.film = @film
-    r.user = current_user
-    if r.save
+    if @film.review params[:rid], current_user
       update_average @film
       redirect_to film_url(@film), notice: "Die Bewertung wurde gespeichert!"
     else
       redirect_to film_url(@film),
-      notice: "Die Bewertung wurde nicht gespeichert!"
+      notice: "Die Bewertung konnte nicht gespeichert werden!"
     end
   end
 
@@ -101,8 +97,7 @@ class FilmsController < ApplicationController
   end
 
   def active
-    @film.active = true
-    @film.save
+    @film.set_active
     redirect_to suggested_films_url
   end
 
