@@ -47,14 +47,16 @@
 
 <p><%= render :partial => "review", :locals => { :film => @film} %></p>
 
-<p>
-  <strong>Ihre Bewertung:</strong>
-  <% if user_has_already_reviewed? @film %>
-    <%= user_review(@film) %>
-  <% else %>
-    <%= render 'rev' %>
-  <% end %>
-</p>
+<% if user_signed_in? %>
+  <p>
+    <strong>Ihre Bewertung:</strong>
+    <% if user_has_already_reviewed? @film %>
+      <%= user_review(@film) %>
+    <% else %>
+      <%= render 'rev' %>
+    <% end %>
+  </p>
+<% end %>
 
 <%= render 'comment' if user_signed_in? %>
 
