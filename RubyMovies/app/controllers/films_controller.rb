@@ -1,7 +1,7 @@
 class FilmsController < ApplicationController
   authorize_resource
   
-  before_action :set_film, only: [:show, :edit, :update, :destroy]
+  before_action :set_film, only: [:show, :edit, :update, :destroy, :review, :active, :rempicture]
 
   # GET /films
   # GET /films.json
@@ -24,7 +24,6 @@ class FilmsController < ApplicationController
   #http://stackoverflow.com/questions/10351730/embed-youtube-video-into-rails-app
   def show
     @comment = Comment.new
-    @film = Film.find(params[:id])
     @comments = Comment.where(film: @film).order(created_at: :desc).page params[:page]
     if @film.link?
       if @film.link.include? "youtube.com"
@@ -83,16 +82,15 @@ class FilmsController < ApplicationController
   end
 
   def review
-    f = Film.find(params[:fid])
     r = Review.new
     r.note = params[:rid]
-    r.film = f
+    r.film = @film
     r.user = current_user
     if r.save
-      update_average f
-      redirect_to film_url(f), notice: "Die Bewertung wurde gespeichert!"
+      update_average @film
+      redirect_to film_url(@film), notice: "Die Bewertung wurde gespeichert!"
     else
-      redirect_to film_url(f),
+      redirect_to film_url(@film),
       notice: "Die Bewertung wurde nicht gespeichert!"
     end
   end
@@ -103,14 +101,12 @@ class FilmsController < ApplicationController
   end
 
   def active
-    f = Film.find(params[:id])
-    f.active = true
-    f.save
+    @film.active = true
+    @film.save
     redirect_to suggested_films_url
   end
 
   def rempicture
-    set_film
     @film.remove_picture!
     @film.picture = nil
     @film.save
